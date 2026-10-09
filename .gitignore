@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.DS_Store
+data/
+results/**/predictions.json
+.cache/
+*.pdf
+results/**/sample_trace.json
+results/**/features.csv
+results/**/candidates.csv
+results/**/decisions.csv
+results/walkthrough/

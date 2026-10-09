@@ -1,0 +1,58 @@
+{
+  "paper-equations": {
+    "precision": 0.4,
+    "recall": 0.09790636967272226,
+    "f1": 0.1506171205133997,
+    "seconds": 0.04039766526400027,
+    "returned": 9.83,
+    "f1_of_macro_precision_recall": 0.15730888478020777
+  },
+  "YAKE-package": {
+    "precision": 0.20360000000000003,
+    "recall": 0.049820842168580015,
+    "f1": 0.07622006475754202,
+    "seconds": 0.009519256420000052,
+    "returned": 9.798,
+    "f1_of_macro_precision_recall": 0.08005279580576281
+  },
+  "without-WCase": {
+    "precision": 0.42840000000000006,
+    "recall": 0.10476111861460462,
+    "f1": 0.1615607420318928,
+    "seconds": 0.035235018164000376,
+    "returned": 9.83,
+    "f1_of_macro_precision_recall": 0.16835309870725165
+  },
+  "without-WPosition": {
+    "precision": 0.369,
+    "recall": 0.09205916386537485,
+    "f1": 0.14082446774624247,
+    "seconds": 0.0483286705940003,
+    "returned": 9.83,
+    "f1_of_macro_precision_recall": 0.14735562864223736
+  },
+  "without-WFreq": {
+    "precision": 0.4132,
+    "recall": 0.10073537577045258,
+    "f1": 0.15523554555667032,
+    "seconds": 0.03781728218400012,
+    "returned": 9.83,
+    "f1_of_macro_precision_recall": 0.16198089966448295
+  },
+  "without-WRel": {
+    "precision": 0.28,
+    "recall": 0.0659929097901079,
+    "f1": 0.10266526848394257,
+    "seconds": 0.054262003930000136,
+    "returned": 9.83,
+    "f1_of_macro_precision_recall": 0.10681152253923157
+  },
+  "without-WSpread": {
+    "precision": 0.40520000000000006,
+    "recall": 0.0988542971437244,
+    "f1": 0.1523613893228906,
+    "seconds": 0.039772878411999626,
+    "returned": 9.83,
+    "f1_of_macro_precision_recall": 0.15893431096458147
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "method": "YAKE",
+    "documents": 500,
+    "precision_at_10": 0.20360000000000003,
+    "recall_at_10": 0.049820842168580015,
+    "f1_at_10": 0.07622006475754202,
+    "extraction_seconds": 0.009708515231999996
+  },
+  {
+    "method": "RAKE-adapted",
+    "documents": 500,
+    "precision_at_10": 0.1328,
+    "recall_at_10": 0.043285008480057896,
+    "f1_at_10": 0.06208504687858978,
+    "extraction_seconds": 0.00023802309200000372
+  },
+  {
+    "method": "TF-IDF-adapted",
+    "documents": 500,
+    "precision_at_10": 0.39679999999999993,
+    "recall_at_10": 0.09403475901182445,
+    "f1_at_10": 0.1459350630271377,
+    "extraction_seconds": 4.4653695999992585e-05
+  }
+]
