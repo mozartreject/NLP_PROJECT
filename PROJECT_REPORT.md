@@ -8,7 +8,7 @@
 
 ## Abstract
 
-This project evaluates all four datasets and the five named methods in Table 1 of Campos et al.'s ECIR 2018 paper, plus an independent reconstruction of its printed YAKE equations. We evaluate 3,614 documents in six configurations, producing 21,684 document–method records. The available SemEval2010 archive contains 243 documents rather than the paper's reported 244. Methods use pinned current implementations and explicitly documented preprocessing. The report compares published precision, recall and F1 with newly measured results, without claiming executable equivalence to publication-time code. All results are computed rather than estimated or copied into unrun cells.
+This project evaluates all four datasets and the five named methods in Table 1 of Campos et al.'s ECIR 2018 paper, plus an independent reconstruction of its printed YAKE equations. We evaluate 3,614 documents in six configurations, producing 21,684 document–method records. The primary SemEval2010 archive contains 243 nonempty-gold pairs rather than the paper's reported 244. A follow-up recovered C-86 text and separately evaluated all 244 texts with original task stemmed gold; see FIDELITY_REPORT.md. Methods use pinned current implementations and explicitly documented preprocessing. The report compares published precision, recall and F1 with newly measured results, without claiming executable equivalence to publication-time code. All results are computed rather than estimated or copied into unrun cells.
 
 ## 1. Problem, paper and scope
 
@@ -97,7 +97,7 @@ The highest measured F1 configurations in this run are TF-IDF-PKE on 500N-KPCrow
 
 Compare the ranking within each dataset rather than choosing the dataset with the most favorable score. A negative delta indicates a reproduction gap for that method/configuration; a positive delta does not establish superiority because tokenizers, stoplists, POS taggers, phrase generation, implementation versions and possibly gold matching/aggregation differ.
 
-The independent reconstruction is an extra project configuration. It is not substituted for the YAKE-package row when comparing the five named methods. The earlier five feature ablations remain available for 500N only; ablations have not been run on all four datasets. No universal importance claim follows from that one-dataset exploratory experiment.
+The independent reconstruction is an extra project configuration. It is not substituted for the YAKE-package row when comparing the five named methods. The earlier five feature ablations remain available as an archived 500N study. The follow-up fidelity audit repeats them on all four valid primary datasets; see FIDELITY_REPORT.md. Neither study establishes universal feature importance.
 
 ## 6. Reproducibility and limitations
 
@@ -107,7 +107,7 @@ The one-document SemEval difference prevents exact corpus identity. Current PKE 
 
 ## 7. Demonstration
 
-Use the full run's manifest to show counts and versions, then COMPARISON_REPORT.md and paper_vs_ours.png for all four datasets. Run the 16 tests, explain one sample pipeline trace from the earlier walkthrough, and show per_document.csv to establish that the aggregate tables come from actual document-level evaluation. Explain that YAKE has no supervised training phase and that the POS models are pretrained dependencies.
+Use the full run's manifest to show counts and versions, then COMPARISON_REPORT.md and paper_vs_ours.png for all four datasets. Run the 31 tests, explain one sample pipeline trace from the earlier walkthrough, and show per_document.csv to establish that the aggregate tables come from actual document-level evaluation. Explain that YAKE has no supervised training phase and that the POS models are pretrained dependencies.
 
 ## References and attribution
 
@@ -118,3 +118,8 @@ Use the full run's manifest to show counts and versions, then COMPARISON_REPORT.
 - [spaCy language models](https://github.com/explosion/spacy-models), English and Spanish POS tagging.
 
 AI assistance was used for scaffolding, testing and report drafting. Joshua should review and be able to explain each submitted component, and adapt the disclosure to course requirements. Independent scorer, RAKE implementation and experiment/evidence integration are project code; PKE, YAKE and POS models are credited reused dependencies.
+
+
+## Subsequent fidelity audit
+
+The original results above remain an immutable archived comparison. The follow-up [fidelity report](FIDELITY_REPORT.md) investigates historical implementations, source recovery, all-dataset feature ablations, controlled preprocessing/scoring choices, matching and length effects, and a separate 244-document SemEval stemmed evaluation. Its [protocol](FIDELITY_PROTOCOL.md) documents both completed work and externally unresolved historical facts.

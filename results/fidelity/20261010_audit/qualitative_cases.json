@@ -1,0 +1,723 @@
+[
+  {
+    "dataset": "SemEval2010",
+    "document_id": "I-22",
+    "selection": "median-length",
+    "gold_count": 19,
+    "literal_present_gold_count_proxy": 16,
+    "whitespace_words": 7781,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.0,
+        "predictions": [
+          "shared mental models",
+          "Cognitive Load",
+          "cognitive load model",
+          "human cognitive load",
+          "Agent Processing Load",
+          "Mental Models",
+          "Load",
+          "HAP teams",
+          "shared mental",
+          "agent"
+        ],
+        "exact_hits": [],
+        "unmatched_predictions": [
+          "agent",
+          "agent processing load",
+          "cognitive load",
+          "cognitive load model",
+          "hap teams",
+          "human cognitive load",
+          "load",
+          "mental models",
+          "shared mental",
+          "shared mental models"
+        ],
+        "missed_literal_present_gold_examples": [
+          "cognitive load theory",
+          "cognitive model",
+          "collaboration",
+          "expectation",
+          "heuristic",
+          "human performance",
+          "human-agent team performance",
+          "info-sharing"
+        ],
+        "nonliteral_gold_examples": [
+          "human-center teamwork",
+          "share belief map",
+          "teamwork schema"
+        ]
+      },
+      "Independent-reconstruction": {
+        "f1": 0.0,
+        "predictions": [
+          "th",
+          "load",
+          "cognitive",
+          "agent",
+          "information",
+          "shared",
+          "cognitive load",
+          "hap",
+          "human",
+          "team"
+        ],
+        "exact_hits": [],
+        "unmatched_predictions": [
+          "agent",
+          "cognitive",
+          "cognitive load",
+          "hap",
+          "human",
+          "information",
+          "load",
+          "shared",
+          "team",
+          "th"
+        ],
+        "missed_literal_present_gold_examples": [
+          "cognitive load theory",
+          "cognitive model",
+          "collaboration",
+          "expectation",
+          "heuristic",
+          "human performance",
+          "human-agent team performance",
+          "info-sharing"
+        ],
+        "nonliteral_gold_examples": [
+          "human-center teamwork",
+          "share belief map",
+          "teamwork schema"
+        ]
+      }
+    }
+  },
+  {
+    "dataset": "SemEval2010",
+    "document_id": "H-44",
+    "selection": "largest-absolute-F1-disagreement",
+    "gold_count": 17,
+    "literal_present_gold_count_proxy": 13,
+    "whitespace_words": 7777,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.29629629629629634,
+        "predictions": [
+          "inverted file index",
+          "time-travel text search",
+          "index",
+          "Time",
+          "Text Search",
+          "index size",
+          "file index",
+          "temporal coalescing",
+          "approximate temporal coalescing",
+          "index list"
+        ],
+        "exact_hits": [
+          "approximate temporal coalescing",
+          "inverted file index",
+          "text search",
+          "time-travel text search"
+        ],
+        "unmatched_predictions": [
+          "file index",
+          "index",
+          "index list",
+          "index size",
+          "temporal coalescing",
+          "time"
+        ],
+        "missed_literal_present_gold_examples": [
+          "document-content overlap",
+          "open source search-engine nutch",
+          "sublist materialization",
+          "temporal search",
+          "temporal text index",
+          "time machine",
+          "validity time-interval",
+          "versioned document collection"
+        ],
+        "nonliteral_gold_examples": [
+          "collaborative authoring environment",
+          "indexing range-based value",
+          "static indexpruning technique",
+          "timestamped information feed"
+        ]
+      },
+      "Independent-reconstruction": {
+        "f1": 0.0,
+        "predictions": [
+          "t",
+          "index",
+          "m",
+          "ti",
+          "time",
+          "e",
+          "d",
+          "o",
+          "performance",
+          "postings"
+        ],
+        "exact_hits": [],
+        "unmatched_predictions": [
+          "d",
+          "e",
+          "index",
+          "m",
+          "o",
+          "performance",
+          "postings",
+          "t",
+          "ti",
+          "time"
+        ],
+        "missed_literal_present_gold_examples": [
+          "approximate temporal coalescing",
+          "document-content overlap",
+          "inverted file index",
+          "open source search-engine nutch",
+          "sublist materialization",
+          "temporal search",
+          "temporal text index",
+          "text search"
+        ],
+        "nonliteral_gold_examples": [
+          "collaborative authoring environment",
+          "indexing range-based value",
+          "static indexpruning technique",
+          "timestamped information feed"
+        ]
+      }
+    }
+  },
+  {
+    "dataset": "Schutz2008",
+    "document_id": "Pediatr_Nephrol-3-1-2064944",
+    "selection": "median-length",
+    "gold_count": 51,
+    "literal_present_gold_count_proxy": 40,
+    "whitespace_words": 3276,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.13114754098360654,
+        "predictions": [
+          "Chronic kidney disease",
+          "chronic renal failure",
+          "end-stage renal disease",
+          "chronic renal",
+          "renal disease",
+          "renal",
+          "Chronic kidney",
+          "kidney disease",
+          "renal failure",
+          "Pediatr Nephrol"
+        ],
+        "exact_hits": [
+          "chronic kidney disease",
+          "end-stage renal disease",
+          "kidney disease",
+          "renal failure"
+        ],
+        "unmatched_predictions": [
+          "chronic kidney",
+          "chronic renal",
+          "chronic renal failure",
+          "pediatr nephrol",
+          "renal",
+          "renal disease"
+        ],
+        "missed_literal_present_gold_examples": [
+          "adults",
+          "age",
+          "care",
+          "children",
+          "ckd",
+          "common",
+          "congenital renal disorders",
+          "countries"
+        ],
+        "nonliteral_gold_examples": [
+          "death",
+          "high proportion",
+          "increase",
+          "mortality rate",
+          "north america",
+          "opportunity",
+          "point prevalence",
+          "severe ckd"
+        ]
+      },
+      "Independent-reconstruction": {
+        "f1": 0.09836065573770492,
+        "predictions": [
+          "renal",
+          "j",
+          "s",
+          "nephrol",
+          "kidney",
+          "pediatr nephrol",
+          "j am soc",
+          "chronic",
+          "children",
+          "ckd"
+        ],
+        "exact_hits": [
+          "children",
+          "ckd",
+          "kidney"
+        ],
+        "unmatched_predictions": [
+          "chronic",
+          "j",
+          "j am soc",
+          "nephrol",
+          "pediatr nephrol",
+          "renal",
+          "s"
+        ],
+        "missed_literal_present_gold_examples": [
+          "adults",
+          "age",
+          "care",
+          "chronic kidney disease",
+          "common",
+          "congenital renal disorders",
+          "countries",
+          "data"
+        ],
+        "nonliteral_gold_examples": [
+          "death",
+          "high proportion",
+          "increase",
+          "mortality rate",
+          "north america",
+          "opportunity",
+          "point prevalence",
+          "severe ckd"
+        ]
+      }
+    }
+  },
+  {
+    "dataset": "Schutz2008",
+    "document_id": "Clin_Rheumatol-3-1-1847465",
+    "selection": "largest-absolute-F1-disagreement",
+    "gold_count": 5,
+    "literal_present_gold_count_proxy": 4,
+    "whitespace_words": 1355,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.26666666666666666,
+        "predictions": [
+          "quality of life",
+          "arthritis",
+          "Rheumatoid arthritis",
+          "Arthritis Rheum",
+          "Health",
+          "quality",
+          "life",
+          "Arthritis Care Res",
+          "World Health Organization",
+          "Mental Health"
+        ],
+        "exact_hits": [
+          "quality of life",
+          "rheumatoid arthritis"
+        ],
+        "unmatched_predictions": [
+          "arthritis",
+          "arthritis care res",
+          "arthritis rheum",
+          "health",
+          "life",
+          "mental health",
+          "quality",
+          "world health organization"
+        ],
+        "missed_literal_present_gold_examples": [
+          "disability",
+          "fibromyalgia"
+        ],
+        "nonliteral_gold_examples": [
+          "none"
+        ]
+      },
+      "Independent-reconstruction": {
+        "f1": 0.0,
+        "predictions": [
+          "arthritis",
+          "health",
+          "j",
+          "quality",
+          "life",
+          "f",
+          "d",
+          "fm",
+          "rheum",
+          "s"
+        ],
+        "exact_hits": [],
+        "unmatched_predictions": [
+          "arthritis",
+          "d",
+          "f",
+          "fm",
+          "health",
+          "j",
+          "life",
+          "quality",
+          "rheum",
+          "s"
+        ],
+        "missed_literal_present_gold_examples": [
+          "disability",
+          "fibromyalgia",
+          "quality of life",
+          "rheumatoid arthritis"
+        ],
+        "nonliteral_gold_examples": [
+          "none"
+        ]
+      }
+    }
+  },
+  {
+    "dataset": "500N-KPCrowd",
+    "document_id": "politics_world-20843432",
+    "selection": "median-length",
+    "gold_count": 38,
+    "literal_present_gold_count_proxy": 38,
+    "whitespace_words": 308,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.08333333333333333,
+        "predictions": [
+          "Civil Affairs Sun",
+          "memorial facilities NANJING",
+          "Civil Affairs Minister",
+          "martyr memorial facilities",
+          "Civil Affairs",
+          "Affairs Sun Shaocheng",
+          "red resources",
+          "memorial facilities",
+          "martyr memorial",
+          "protect martyr memorial"
+        ],
+        "exact_hits": [
+          "martyr memorial facilities",
+          "memorial facilities"
+        ],
+        "unmatched_predictions": [
+          "affairs sun shaocheng",
+          "civil affairs",
+          "civil affairs minister",
+          "civil affairs sun",
+          "martyr memorial",
+          "memorial facilities nanjing",
+          "protect martyr memorial",
+          "red resources"
+        ],
+        "missed_literal_present_gold_examples": [
+          "addressing",
+          "allocate",
+          "areas",
+          "central",
+          "china",
+          "china launches national",
+          "dollar",
+          "effective"
+        ],
+        "nonliteral_gold_examples": []
+      },
+      "Independent-reconstruction": {
+        "f1": 0.08333333333333333,
+        "predictions": [
+          "civil affairs",
+          "memorial",
+          "civil affairs sun",
+          "memorial facilities",
+          "facilities",
+          "civil affairs minister",
+          "martyr memorial",
+          "civil",
+          "said",
+          "martyr"
+        ],
+        "exact_hits": [
+          "memorial",
+          "memorial facilities"
+        ],
+        "unmatched_predictions": [
+          "civil",
+          "civil affairs",
+          "civil affairs minister",
+          "civil affairs sun",
+          "facilities",
+          "martyr",
+          "martyr memorial",
+          "said"
+        ],
+        "missed_literal_present_gold_examples": [
+          "addressing",
+          "allocate",
+          "areas",
+          "central",
+          "china",
+          "china launches national",
+          "dollar",
+          "effective"
+        ],
+        "nonliteral_gold_examples": []
+      }
+    }
+  },
+  {
+    "dataset": "500N-KPCrowd",
+    "document_id": "politics_world-20947475",
+    "selection": "largest-absolute-F1-disagreement",
+    "gold_count": 29,
+    "literal_present_gold_count_proxy": 29,
+    "whitespace_words": 92,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.05128205128205129,
+        "predictions": [
+          "Swaziland serial killer",
+          "sentences Swaziland serial",
+          "Judge sentences Swaziland",
+          "Judge Jacobus Annandale",
+          "serial killer",
+          "Jacobus Annandale sentenced",
+          "hanging MBABANE",
+          "Media in Swaziland",
+          "Swaziland serial",
+          "sentences Swaziland"
+        ],
+        "exact_hits": [
+          "serial killer"
+        ],
+        "unmatched_predictions": [
+          "hanging mbabane",
+          "jacobus annandale sentenced",
+          "judge jacobus annandale",
+          "judge sentences swaziland",
+          "media in swaziland",
+          "sentences swaziland",
+          "sentences swaziland serial",
+          "swaziland serial",
+          "swaziland serial killer"
+        ],
+        "missed_literal_present_gold_examples": [
+          "african kingdom",
+          "annandale",
+          "arrested",
+          "been sentenced",
+          "calmly",
+          "carried",
+          "children",
+          "convicted"
+        ],
+        "nonliteral_gold_examples": []
+      },
+      "Independent-reconstruction": {
+        "f1": 0.5128205128205129,
+        "predictions": [
+          "swaziland",
+          "simelane",
+          "judge",
+          "death",
+          "killer",
+          "serial",
+          "hanging",
+          "mbabane",
+          "carried",
+          "sentenced"
+        ],
+        "exact_hits": [
+          "carried",
+          "death",
+          "hanging",
+          "judge",
+          "killer",
+          "mbabane",
+          "sentenced",
+          "serial",
+          "simelane",
+          "swaziland"
+        ],
+        "unmatched_predictions": [],
+        "missed_literal_present_gold_examples": [
+          "african kingdom",
+          "annandale",
+          "arrested",
+          "been sentenced",
+          "calmly",
+          "children",
+          "convicted",
+          "david simelane"
+        ],
+        "nonliteral_gold_examples": []
+      }
+    }
+  },
+  {
+    "dataset": "WICC",
+    "document_id": "20699",
+    "selection": "median-length",
+    "gold_count": 4,
+    "literal_present_gold_count_proxy": 3,
+    "whitespace_words": 1881,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.28571428571428575,
+        "predictions": [
+          "tic",
+          "formación docente",
+          "Residencia EIE Formación",
+          "TIC CONTEXTO EDUCATIVO",
+          "formación",
+          "docente",
+          "aprendizaje",
+          "Residencia",
+          "EIE",
+          "UNSE TIC línea"
+        ],
+        "exact_hits": [
+          "formación docente",
+          "tic"
+        ],
+        "unmatched_predictions": [
+          "aprendizaje",
+          "docente",
+          "eie",
+          "formación",
+          "residencia",
+          "residencia eie formación",
+          "tic contexto educativo",
+          "unse tic línea"
+        ],
+        "missed_literal_present_gold_examples": [
+          "innovación educativa"
+        ],
+        "nonliteral_gold_examples": [
+          "e learning"
+        ]
+      },
+      "Independent-reconstruction": {
+        "f1": 0.14285714285714288,
+        "predictions": [
+          "tic",
+          "formación",
+          "eie",
+          "residencia",
+          "aprendizaje",
+          "docente",
+          "educativa",
+          "desarrollo",
+          "informática",
+          "alumnos"
+        ],
+        "exact_hits": [
+          "tic"
+        ],
+        "unmatched_predictions": [
+          "alumnos",
+          "aprendizaje",
+          "desarrollo",
+          "docente",
+          "educativa",
+          "eie",
+          "formación",
+          "informática",
+          "residencia"
+        ],
+        "missed_literal_present_gold_examples": [
+          "formación docente",
+          "innovación educativa"
+        ],
+        "nonliteral_gold_examples": [
+          "e learning"
+        ]
+      }
+    }
+  },
+  {
+    "dataset": "WICC",
+    "document_id": "19630",
+    "selection": "largest-absolute-F1-disagreement",
+    "gold_count": 3,
+    "literal_present_gold_count_proxy": 3,
+    "whitespace_words": 1339,
+    "methods": {
+      "YAKE-package": {
+        "f1": 0.4615384615384615,
+        "predictions": [
+          "conocimiento",
+          "gestión",
+          "gestión del conocimiento",
+          "proyecto",
+          "organizaciones",
+          "enfoque de gestión",
+          "gestión académica",
+          "organizaciones educativas",
+          "organización",
+          "Información"
+        ],
+        "exact_hits": [
+          "gestión académica",
+          "gestión del conocimiento",
+          "organizaciones educativas"
+        ],
+        "unmatched_predictions": [
+          "conocimiento",
+          "enfoque de gestión",
+          "gestión",
+          "información",
+          "organizaciones",
+          "organización",
+          "proyecto"
+        ],
+        "missed_literal_present_gold_examples": [],
+        "nonliteral_gold_examples": []
+      },
+      "Independent-reconstruction": {
+        "f1": 0.0,
+        "predictions": [
+          "gestión",
+          "conocimiento",
+          "proyecto",
+          "organizaciones",
+          "información",
+          "organización",
+          "tecnologías",
+          "gestión de conocimiento",
+          "educativas",
+          "enfoque"
+        ],
+        "exact_hits": [],
+        "unmatched_predictions": [
+          "conocimiento",
+          "educativas",
+          "enfoque",
+          "gestión",
+          "gestión de conocimiento",
+          "información",
+          "organizaciones",
+          "organización",
+          "proyecto",
+          "tecnologías"
+        ],
+        "missed_literal_present_gold_examples": [
+          "gestión académica",
+          "gestión del conocimiento",
+          "organizaciones educativas"
+        ],
+        "nonliteral_gold_examples": []
+      }
+    }
+  }
+]

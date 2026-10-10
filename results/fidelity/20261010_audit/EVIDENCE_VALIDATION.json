@@ -1,0 +1,183 @@
+{
+  "extraction_source_hashes": {
+    "core": {
+      "fidelity_experiments.py": {
+        "sha256": "a22804ebe2ad4b8441b216850591677d008ee1e2573484ec39578bed5e79b2e7",
+        "verified_at": "results/fidelity/20261010_audit/source_snapshots/fidelity_experiments_v1.py"
+      },
+      "replication/fidelity_core.py": {
+        "sha256": "48a0e0b15956913cb16d906d41ce684ed9f06829b20213f3ca86f38dbc2983a1",
+        "verified_at": "replication/fidelity_core.py"
+      },
+      "replication/core.py": {
+        "sha256": "dc3e15d138bd172edafe7cd352dc4ed3f6d38c52a8ce2927dcad732d42b14aa0",
+        "verified_at": "replication/core.py"
+      },
+      "replication/historical/__init__.py": {
+        "sha256": "036e287a73d137ecaf9bb3d9417525c7725325d56c7029f48f0e2c70d7e9bebd",
+        "verified_at": "replication/historical/__init__.py"
+      },
+      "prepare_fidelity_sources.py": {
+        "sha256": "74b684efa27bd4dff4404539903817e01eb9dc9090523a22afd1576db8a62db3",
+        "verified_at": "prepare_fidelity_sources.py"
+      },
+      "full_comparison.py": {
+        "sha256": "6d72577f384e48b4ace244c5a854d53dca758790a2035e36981ac9656c2fabb1",
+        "verified_at": "full_comparison.py"
+      },
+      "configs/fidelity_sources.json": {
+        "sha256": "ff1b783231c1026fef7d942acc6703f69d09f4bd456780f6b66302f89d9c3c5b",
+        "verified_at": "configs/fidelity_sources.json"
+      }
+    },
+    "history": {
+      "fidelity_experiments.py": {
+        "sha256": "a22804ebe2ad4b8441b216850591677d008ee1e2573484ec39578bed5e79b2e7",
+        "verified_at": "results/fidelity/20261010_audit/source_snapshots/fidelity_experiments_v1.py"
+      },
+      "replication/fidelity_core.py": {
+        "sha256": "9e21f0e6d3aedbbbe36169f203cb852ae810d5bcdc7decc2005995f214c8f304",
+        "verified_at": "results/fidelity/20261010_audit/source_snapshots/fidelity_core_v1.py"
+      },
+      "replication/core.py": {
+        "sha256": "dc3e15d138bd172edafe7cd352dc4ed3f6d38c52a8ce2927dcad732d42b14aa0",
+        "verified_at": "replication/core.py"
+      },
+      "replication/historical/__init__.py": {
+        "sha256": "036e287a73d137ecaf9bb3d9417525c7725325d56c7029f48f0e2c70d7e9bebd",
+        "verified_at": "replication/historical/__init__.py"
+      },
+      "prepare_fidelity_sources.py": {
+        "sha256": "74b684efa27bd4dff4404539903817e01eb9dc9090523a22afd1576db8a62db3",
+        "verified_at": "prepare_fidelity_sources.py"
+      },
+      "full_comparison.py": {
+        "sha256": "6d72577f384e48b4ace244c5a854d53dca758790a2035e36981ac9656c2fabb1",
+        "verified_at": "full_comparison.py"
+      },
+      "configs/fidelity_sources.json": {
+        "sha256": "ff1b783231c1026fef7d942acc6703f69d09f4bd456780f6b66302f89d9c3c5b",
+        "verified_at": "configs/fidelity_sources.json"
+      }
+    },
+    "baselines": {
+      "fidelity_experiments.py": {
+        "sha256": "a22804ebe2ad4b8441b216850591677d008ee1e2573484ec39578bed5e79b2e7",
+        "verified_at": "results/fidelity/20261010_audit/source_snapshots/fidelity_experiments_v1.py"
+      },
+      "replication/fidelity_core.py": {
+        "sha256": "9e21f0e6d3aedbbbe36169f203cb852ae810d5bcdc7decc2005995f214c8f304",
+        "verified_at": "results/fidelity/20261010_audit/source_snapshots/fidelity_core_v1.py"
+      },
+      "replication/core.py": {
+        "sha256": "dc3e15d138bd172edafe7cd352dc4ed3f6d38c52a8ce2927dcad732d42b14aa0",
+        "verified_at": "replication/core.py"
+      },
+      "replication/historical/__init__.py": {
+        "sha256": "036e287a73d137ecaf9bb3d9417525c7725325d56c7029f48f0e2c70d7e9bebd",
+        "verified_at": "replication/historical/__init__.py"
+      },
+      "prepare_fidelity_sources.py": {
+        "sha256": "74b684efa27bd4dff4404539903817e01eb9dc9090523a22afd1576db8a62db3",
+        "verified_at": "prepare_fidelity_sources.py"
+      },
+      "full_comparison.py": {
+        "sha256": "6d72577f384e48b4ace244c5a854d53dca758790a2035e36981ac9656c2fabb1",
+        "verified_at": "full_comparison.py"
+      },
+      "configs/fidelity_sources.json": {
+        "sha256": "ff1b783231c1026fef7d942acc6703f69d09f4bd456780f6b66302f89d9c3c5b",
+        "verified_at": "configs/fidelity_sources.json"
+      }
+    },
+    "recovered_cpp": {
+      "run_recovered_baselines.py": {
+        "sha256": "4409366fc99bd88664a901e6c8845aec93ebb214f8dd99e03b76881c4f47a3d4",
+        "verified_at": "run_recovered_baselines.py"
+      }
+    },
+    "semeval244_stemmed": {
+      "semeval244_sensitivity.py": {
+        "sha256": "914edbc5bd3492ce6e45c2a0cd597f84fc28286ce293b038e8173d4b43a02d99",
+        "verified_at": "semeval244_sensitivity.py"
+      }
+    },
+    "early_releases": {
+      "historical_release_sweep.py": {
+        "sha256": "d647c0a467362ec862f5a4d9d41a2bb6f139ff8361ede9fb030a684c5b293d0e",
+        "verified_at": "historical_release_sweep.py"
+      }
+    }
+  },
+  "core": {
+    "unique_records": 68666,
+    "metrics_independently_recomputed": 68666,
+    "all_matched": true
+  },
+  "history": {
+    "unique_records": 23658,
+    "metrics_independently_recomputed": 23658,
+    "all_matched": true
+  },
+  "baselines": {
+    "unique_records": 25298,
+    "metrics_independently_recomputed": 25298,
+    "all_matched": true
+  },
+  "recovered_cpp": {
+    "unique_records": 10842,
+    "metrics_independently_recomputed": 10842,
+    "all_matched": true
+  },
+  "early_releases": {
+    "unique_records": 14456,
+    "metrics_independently_recomputed": 14456,
+    "all_matched": true
+  },
+  "archived_main": {
+    "unique_records": 21684,
+    "metrics_independently_recomputed": 21684,
+    "all_matched": true
+  },
+  "baseline_equality": {
+    "SemEval2010": {
+      "independent_baseline_equals_archived_metrics": true,
+      "current_package_equals_archived_metrics": true,
+      "exact_ranked_outputs_equal": true,
+      "030_and_032_outputs_equal": true,
+      "all_three_common_PKE_ranked_phrases_and_metrics_equal_archived": true,
+      "TF_IDF_native_equals_no_POS_null_control": true
+    },
+    "Schutz2008": {
+      "independent_baseline_equals_archived_metrics": true,
+      "current_package_equals_archived_metrics": true,
+      "exact_ranked_outputs_equal": true,
+      "030_and_032_outputs_equal": true,
+      "all_three_common_PKE_ranked_phrases_and_metrics_equal_archived": true,
+      "TF_IDF_native_equals_no_POS_null_control": true
+    },
+    "500N-KPCrowd": {
+      "independent_baseline_equals_archived_metrics": true,
+      "current_package_equals_archived_metrics": true,
+      "exact_ranked_outputs_equal": true,
+      "030_and_032_outputs_equal": true,
+      "all_three_common_PKE_ranked_phrases_and_metrics_equal_archived": true,
+      "TF_IDF_native_equals_no_POS_null_control": true
+    },
+    "WICC": {
+      "independent_baseline_equals_archived_metrics": true,
+      "current_package_equals_archived_metrics": true,
+      "exact_ranked_outputs_equal": true,
+      "030_and_032_outputs_equal": true,
+      "all_three_common_PKE_ranked_phrases_and_metrics_equal_archived": true,
+      "TF_IDF_native_equals_no_POS_null_control": true
+    }
+  },
+  "additional_evaluations": 144872,
+  "archived_main_evaluations": 21684,
+  "semeval244_stemmed": {
+    "unique_records": 1952,
+    "all_recomputed": true,
+    "protocol_separate": true
+  }
+}

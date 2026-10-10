@@ -1,0 +1,38 @@
+/Users/joshua/Desktop/NLP_PROJECT/.venv_full/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+test_jsonl_unicode_separators_are_not_record_boundaries (test_fidelity.EvidenceReaderRegressionTests) ... ok
+test_baseline_matches_original_with_trace_and_ranking (test_fidelity.FidelityTests) ... ok
+test_empty_recovered_gold_is_not_fabricated (test_fidelity.FidelityTests) ... ok
+test_every_declared_policy_finite (test_fidelity.FidelityTests) ... ok
+test_holm_known_example (test_fidelity.FidelityTests) ... ok
+test_invalid_policy (test_fidelity.FidelityTests) ... ok
+test_native_frequency_does_not_remove_term_inventory (test_fidelity.FidelityTests) ... ok
+test_relatedness_intervention_hand_calculation (test_fidelity.FidelityTests) ... ok
+test_surface_forms_preserved_when_merging_plural_statistics (test_fidelity.FidelityTests) ... ok
+test_unique_sentence_positions (test_fidelity.FidelityTests) ... ok
+test_historical_output_order_adapter (test_fidelity.StatisticalAndSourceTests) ... ok
+test_holm_preserves_input_order_and_caps_probability (test_fidelity.StatisticalAndSourceTests) ... ok
+test_internal_stopword_transition_hand_calculation (test_fidelity.StatisticalAndSourceTests) ... ok
+test_missing_maui_gold_and_official_gold_are_different_cases (test_fidelity.StatisticalAndSourceTests) ... ok
+test_segtok_embedded_whitespace_url_is_split_before_candidate_scoring (test_fidelity.TokenizerRegressionTests) ... ok
+test_common_pos_candidates (test_full_comparison.FullComparisonTests) ... ok
+test_empty_predictions_not_dropped (test_full_comparison.FullComparisonTests) ... ok
+test_fast_mode_preserves_keywords (test_full_comparison.FullComparisonTests) ... ok
+test_four_dataset_counts_and_ids (test_full_comparison.FullComparisonTests) ... ok
+test_rake_discards_long_phrases_before_counts (test_full_comparison.FullComparisonTests) ... ok
+test_rake_hand_calculation (test_full_comparison.FullComparisonTests) ... ok
+test_spanish_stopword_policy (test_full_comparison.FullComparisonTests) ... ok
+test_tfidf_explicit_corpus_statistics (test_full_comparison.FullComparisonTests) ... ok
+test_casing_excludes_sentence_start (test_replication.ReplicationTests) ... ok
+test_counts_and_boundaries (test_replication.ReplicationTests) ... ok
+test_dedup_distance (test_replication.ReplicationTests) ... ok
+test_empty_stopwords_determinism (test_replication.ReplicationTests) ... ok
+test_hand_computed_single_term (test_replication.ReplicationTests) ... ok
+test_invalid_configuration (test_replication.ReplicationTests) ... ok
+test_precision_unfilled_slots_and_duplicates (test_replication.ReplicationTests) ... ok
+test_scores_finite (test_replication.ReplicationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.540s
+
+OK

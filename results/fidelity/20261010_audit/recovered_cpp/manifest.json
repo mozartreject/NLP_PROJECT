@@ -1,0 +1,67 @@
+{
+  "status": "complete",
+  "source_audit": {
+    "archive_url": "https://web.archive.org/web/20210425074158id_/http://www.hlt.utdallas.edu/~saidul/code/Keyphrase_Extractor-1.0.zip",
+    "archive_sha256": "6f051a4aeeaa49c96ff27f3a889666886a7b32596c18695f4b90f8407f8a0016",
+    "compiler_version": "Apple clang version 17.0.0 (clang-1700.4.4.1)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "patches": [
+      "TextRank: rename identifier ratio to selection_ratio (modern libc++ name collision)",
+      "All methods: redirect restored console output to /dev/null instead of /dev/tty (noninteractive execution)"
+    ],
+    "sources": {
+      "TextRank": {
+        "original_sha256": "d41a1b876333b48f6e370c9ddf39962b44ed1e92355b02785e6a970359e1cc90",
+        "patched_sha256": "70be51755ed99e96c198f7b7225002ebfbbe624e9afd2f069c9197f0ad00c900",
+        "binary_sha256": "389e1b2574f7ab1b16bf8fff66d94a62e844cc7440283f7bab9a13793a0fe669"
+      },
+      "SingleRank": {
+        "original_sha256": "2f6ddf8a22e4ac5abb9bcb162531ae138f2bb5d2e1ca4601c86d2a76b33097cc",
+        "patched_sha256": "23b5ea67e0431e391fa596f8e65573bbcc90f67b199bdf9a9920afcc4b7dc66e",
+        "binary_sha256": "11528433d4aabf121a0f5de006006143e15954a618c584330f6b8a0f493824ea"
+      },
+      "TfIdf": {
+        "original_sha256": "0657e06585c65323e92836634fdd38780538ba23f4211fd91b491c932eafca3a",
+        "patched_sha256": "50c61754e19ceaabfd37e8623a03dfd35dd86d29d921bd70374b694d2ed5c7b0",
+        "binary_sha256": "63f3bdfef8594556c74eed0dc3dda7bc237e14a85dc42a1035453c7a40900711"
+      }
+    }
+  },
+  "script_sha256": "4409366fc99bd88664a901e6c8845aec93ebb214f8dd99e03b76881c4f47a3d4",
+  "limit": 0,
+  "POS_bridge": "Cached spaCy universal tags mapped NOUN→NN, PROPN→NNP, ADJ→JJ; other tags→XX. This is not the historical Stanford tagger.",
+  "settings": {
+    "TextRank": {
+      "ratio": 0.33,
+      "window": 2,
+      "iterations": 20
+    },
+    "SingleRank": {
+      "top": 10,
+      "window": 10,
+      "iterations": 20
+    },
+    "TfIdf": {
+      "top": 10
+    }
+  },
+  "selection": "Raw source output order, then discard >3-word phrases, then first 10; no invented ranking scores. TextRank output is document order, not a sorted phrase-score list.",
+  "datasets": {
+    "500N-KPCrowd": {
+      "documents": 500,
+      "archive_sha256": "ee422c40d2655ee59c02add44319ea9b7a9b25947dc21947da73a2a6e47fbbf7"
+    },
+    "SemEval2010": {
+      "documents": 243,
+      "archive_sha256": "6ebf733730e15a9951854323f3966864ddf7c4a43addc66a5901d6dcf0b9e580"
+    },
+    "Schutz2008": {
+      "documents": 1231,
+      "archive_sha256": "09f12121bee223fc25c68699c93eb26c3e066590180be09a29871d895256c844"
+    },
+    "WICC": {
+      "documents": 1640,
+      "archive_sha256": "f539fda57b1221cc6566d51ca57651ffdff35df61f2afdaad60f11359ee30995"
+    }
+  },
+  "records": 10842
+}

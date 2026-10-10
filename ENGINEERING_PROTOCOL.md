@@ -4,7 +4,7 @@
 
 Selected paper: Campos et al., *A Text Feature Based Automatic Keyword Extraction Method for Single Documents*, ECIR 2018, Springer LNCS 10772, 684–691. DOI: 10.1007/978-3-319-76941-7_63.
 
-This project is a **selected-benchmark experimental reproduction and independent reconstruction of printed equations**, not a verified exact reproduction of all original experiments. The original paper evaluates four datasets. We currently evaluate the 500-document 500N-KPCrowd news dataset. Existing `evaluate.py` results remain a package-based reproduction with adapted baselines; the new pipeline does not replace those evidence files.
+This project is a **selected-benchmark experimental reproduction and independent reconstruction of printed equations**, not a verified exact reproduction of all original experiments. The original paper evaluates four datasets. This file documents the archived 500-document engineering run. The independent scorer is now evaluated across all four datasets; see FIDELITY_PROTOCOL.md and FIDELITY_REPORT.md for the follow-up audit. Existing `evaluate.py` results remain a package-based reproduction with adapted baselines; the new pipeline does not replace those evidence files.
 
 No neural model, labels, or gradient-based training is involved in YAKE. Gold keywords are read only for evaluation and recorded alongside the example trace. Extraction depends only on document text. Show the computation stages rather than claiming training epochs.
 
@@ -34,7 +34,7 @@ The package reference uses the installed YAKE version with identical exposed n-g
 Historical author source inspected at commit `36b3f0967cbef4048261c33845eb036163c6f278` (16 November 2018), `yake/datarepresentation.py`:
 https://github.com/INESCTEC/yake/blob/36b3f0967cbef4048261c33845eb036163c6f278/yake/datarepresentation.py
 
-This source already omits PL/PR, uses natural-log casing and position formulas, and adds internal-stopword weighting. It postdates the conference publication. Thus neither that historical implementation nor the current package is assumed to be the exact code used for the paper's reported table.
+This November Git snapshot omits PL/PR, uses natural-log casing and position formulas, and adds internal-stopword weighting. The newly recovered January/March 2018 PyPI sources include PL/PR; see the fidelity audit. The Git snapshot is not a substitute for those earlier sources. It postdates the conference publication. Thus neither that historical implementation nor the current package is assumed to be the exact code used for the paper's reported table.
 
 ## Evaluation
 
@@ -76,6 +76,6 @@ During the presentation, open the original paper, show the documented equation d
 
 Credit the paper, author YAKE implementation, INESCTEC dataset repository and scikit-learn stoplist. The independent reconstruction is new project code; the package reference is reused upstream software. An installed library run alone is not a from-scratch algorithm implementation.
 
-This reconstruction has no POS filtering, and previous RAKE/TF-IDF baselines are adaptations. It cannot establish that YAKE's original comparative claims fail or hold. Differences may come from tokenizer, stopwords, printed-equation ambiguities, gold matching, implementation version and metric aggregation. Timings include extraction and trace construction, not dataset loading, bootstrap analysis or plotting; hardware and workload affect them.
+The independent reconstruction has no POS filtering. The initial RAKE/TF-IDF baselines were adaptations; the expanded comparison and fidelity audit separately evaluate declared PKE policies and recovered historical sources. It cannot establish that YAKE's original comparative claims fail or hold. Differences may come from tokenizer, stopwords, printed-equation ambiguities, gold matching, implementation version and metric aggregation. Timings include extraction and trace construction, not dataset loading, bootstrap analysis or plotting; hardware and workload affect them.
 
 Do not redistribute the downloaded paper or raw dataset on public GitHub without checking their licenses. Preserve download links, dataset hashes and setup instructions; the existing ignore file excludes raw data and full prediction dumps. Review gold/text traces before publishing because those contain sample dataset text. Ask the instructor to approve the selected scope if that course-policy step has not already happened.

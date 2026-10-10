@@ -74,4 +74,4 @@ Evidence: manifest.json, predictions.jsonl, per_document.csv, summary.json, pape
 - Author evaluation wrapper context: https://github.com/INESCTEC/kep
 - POS model releases: https://github.com/explosion/spacy-models
 
-The paper's original executable baseline versions and complete parameterization have not been recovered. A full-coverage comparison cannot, by itself, prove exact historical replication.
+The later fidelity audit recovered historical YAKE releases, a preconference RAKE snapshot and the cited-page C++ baseline family. Exact paper runtime identity, POS-tagged inputs and complete parameterization remain unresolved. See FIDELITY_PROTOCOL.md and FIDELITY_REPORT.md. A full-coverage comparison cannot, by itself, prove exact historical replication.

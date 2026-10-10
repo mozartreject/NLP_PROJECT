@@ -1,0 +1,42 @@
+[
+  {
+    "dataset": "SemEval2010",
+    "documents": 243,
+    "total_unique_gold_phrases": 3762,
+    "gold_per_document": 15.481481481481481,
+    "gold_over3_words": 239,
+    "literal_text_present_gold_proxy": 2736,
+    "literal_presence_definition": "Casefold whitespace text; regex Unicode word boundaries; diagnostic, not an extraction upper bound",
+    "whitespace_words_mean": 8032.551440329218
+  },
+  {
+    "dataset": "Schutz2008",
+    "documents": 1231,
+    "total_unique_gold_phrases": 53800,
+    "gold_per_document": 43.704305442729485,
+    "gold_over3_words": 938,
+    "literal_text_present_gold_proxy": 45551,
+    "literal_presence_definition": "Casefold whitespace text; regex Unicode word boundaries; diagnostic, not an extraction upper bound",
+    "whitespace_words_mean": 3551.0016246953696
+  },
+  {
+    "dataset": "500N-KPCrowd",
+    "documents": 500,
+    "total_unique_gold_phrases": 24456,
+    "gold_per_document": 48.912,
+    "gold_over3_words": 697,
+    "literal_text_present_gold_proxy": 20469,
+    "literal_presence_definition": "Casefold whitespace text; regex Unicode word boundaries; diagnostic, not an extraction upper bound",
+    "whitespace_words_mean": 393.908
+  },
+  {
+    "dataset": "WICC",
+    "documents": 1640,
+    "total_unique_gold_phrases": 5858,
+    "gold_per_document": 3.571951219512195,
+    "gold_over3_words": 872,
+    "literal_text_present_gold_proxy": 5462,
+    "literal_presence_definition": "Casefold whitespace text; regex Unicode word boundaries; diagnostic, not an extraction upper bound",
+    "whitespace_words_mean": 1917.1201219512195
+  }
+]

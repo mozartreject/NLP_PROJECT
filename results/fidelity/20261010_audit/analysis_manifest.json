@@ -1,0 +1,28 @@
+{
+  "script_sha256": "ac2405b6c0fc2347ceb0adb84328e7ac8bf95a22b9a88bde96589855ec3d32cb",
+  "python": "3.9.6 (default, Oct 17 2025, 17:15:53) \n[Clang 17.0.0 (clang-1700.4.4.1)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "installed_packages": {
+    "pandas": "2.3.3",
+    "numpy": "1.26.4",
+    "yake": "0.4.8",
+    "spacy": "3.7.5",
+    "segtok": "1.5.11",
+    "jellyfish": "1.2.1",
+    "scipy": "1.13.1",
+    "nltk": "3.9.1",
+    "networkx": "3.2.1",
+    "pke": "2.0.0"
+  },
+  "input_manifest_sha256": {
+    "core": "98895d5ea018efc69d0163bd524d567a5a9c2d586db323ba6c810821f06305b9",
+    "history": "59e29a915aba2ace10e05e25cbea9502481413e24534049de0ae8b884f7fc138",
+    "baselines": "458f93035675610ac7576a4b9138f56e6a914024b29e036711f2c36f51af3074",
+    "recovered_cpp": "0ed06b7000f5d00c9f39f9916b2f4d8c8ae3fd8122d65e6592dfd87118e9bb6d",
+    "semeval244_stemmed": "d1173e571ebf3932b00b872c08d0c73ac41811017309d92fad8943a616b4b411",
+    "early_releases": "5f6fe1b40eccc392808908783e10320c6bce5ed746bb800c8d6fbf28f0db63fd"
+  },
+  "archived_manifest_sha256": "9d725f6e94f8651908c48f349e94ece95f7e37279bf10b1bee81a254f8886536",
+  "no_posthoc_configuration_selection": true,
+  "statistics_note": "Exploratory paired tests; Holm correction per declared family. Matching changes are separately labelled sensitivities."
+}

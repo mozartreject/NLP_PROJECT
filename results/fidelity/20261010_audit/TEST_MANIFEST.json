@@ -1,0 +1,12 @@
+{
+  "command": "PYTHONDONTWRITEBYTECODE=1 .venv_full/bin/python -m unittest discover -s tests -v",
+  "tests_passed": 31,
+  "result": "OK",
+  "log_sha256": "0d816d4dd8b9bc86c39ab4f23f6a781554bdfc279b8b35c01a92c179ee6156f6",
+  "test_source_sha256": {
+    "tests/test_fidelity.py": "4874e143895f0ab429550d3550e678819a6664a9db2f080955dfb6a4ee49c977",
+    "tests/test_full_comparison.py": "528dbaef0241e806b3a638efe2a4be1f380cbe2f2576d5ce68449ced70deeb77",
+    "tests/test_replication.py": "72d6d9265c72b456b0c3545436d424af2cb95b673a58845d1f54f0fb1370874c"
+  },
+  "recorded_utc": "2026-10-10T14:23:45.618683+00:00"
+}

@@ -1,0 +1,50 @@
+{
+  "yake-0.3.0": {
+    "url": "https://files.pythonhosted.org/packages/5f/bb/86a6c535747f3954ec27ad55b83de25541da837afc19446e994452a0b024/yake-0.3.0.tar.gz",
+    "sha256": "6f282647c5cc2042dea039cbc47dcfb23514074098e0f986f89a7e66a1d2fec3",
+    "upload_time": "2018-01-13T13:20:58.435008Z",
+    "runtime": "Current pinned dependencies; original dependency versions unknown"
+  },
+  "yake-0.3.2": {
+    "url": "https://files.pythonhosted.org/packages/96/d9/bb268e57ffe66540a747b346b4302a4ff2874fab3535cf1d49e569db61a1/yake-0.3.2.tar.gz",
+    "sha256": "c84911d89f8dedd1533066cb05096b0ac96d4b36c2f71ba5afec4fdb036c53b3",
+    "upload_time": "2018-03-28T14:23:30.439518Z",
+    "runtime": "Current pinned dependencies; original dependency versions unknown"
+  },
+  "RAKE-2018": {
+    "url": "https://raw.githubusercontent.com/zelandiya/RAKE-tutorial/14e153aa9cb2c02456df3880cd5fd30f7ee3aa95/rake.py",
+    "commit": "14e153aa9cb2c02456df3880cd5fd30f7ee3aa95",
+    "sha256": "cf105073bf6f6e2b26c16cc0a8465a30d2077908c82b3a4a1e82e323f9b689d9"
+  },
+  "KEP-stopwords-en": {
+    "url": "https://raw.githubusercontent.com/INESCTEC/kep/ef7ed02ae931dce9e84f25c7b9d0b1bd84c0768a/kep/StopwordsList/stopwords_en.txt",
+    "sha256": "2bf198d40515e0df6e7b7bca9bd4b9df793936158a2965f34ed27363d5d07a2f",
+    "date": "2020; not verified ECIR 2018 stoplists"
+  },
+  "KEP-stopwords-es": {
+    "url": "https://raw.githubusercontent.com/INESCTEC/kep/ef7ed02ae931dce9e84f25c7b9d0b1bd84c0768a/kep/StopwordsList/stopwords_es.txt",
+    "sha256": "80e00f7b10b04cfbb1e8ac6a30e77e53889b7e17a5283ef14e3e1e8a6ec6850d",
+    "date": "2020; not verified ECIR 2018 stoplists"
+  },
+  "RAKE-SmartStoplist": {
+    "url": "https://raw.githubusercontent.com/zelandiya/RAKE-tutorial/14e153aa9cb2c02456df3880cd5fd30f7ee3aa95/data/stoplists/SmartStoplist.txt",
+    "sha256": "3d873815f0cd12bde3c123fb63760daee2a88689fb9d2f869ede806bd6505923"
+  },
+  "alternate-SemEval": {
+    "url": "https://raw.githubusercontent.com/zelandiya/keyword-extraction-datasets/master/SemEval2010-Maui.zip",
+    "sha256": "07ca5616dc7261ddac1bd670ba3a1c2fb71128e043720e91889c49ca1bf546b3"
+  },
+  "SemEval-recovery": {
+    "shared_texts_equal_after_outer_whitespace_strip": 243,
+    "shared_normalized_gold_sets_equal": 243,
+    "recovered_id": "C-86",
+    "documents_text": 244,
+    "documents_with_nonempty_comparable_gold": 243,
+    "recovered_gold_empty": true,
+    "recovered_text_sha256": "75637d9d52660425a47a45fb2b56c85814bdbbf460c5925ccd886d7da2900e96",
+    "recovered_gold_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "combined_archive_sha256": "6ebf733730e15a9951854323f3966864ddf7c4a43addc66a5901d6dcf0b9e580",
+    "original_archive_sha256": "d4d5e03f7e2c5f2d5fc7b85d656836ad16648adbc1e49d4a9c2bb2a65a41cab0",
+    "policy": "Original 243 byte streams retained; C-86 pair appended from alternate archive"
+  }
+}

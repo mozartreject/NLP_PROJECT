@@ -23,8 +23,8 @@ The project includes:
 - **Six configurations** and **21,684 document–method evaluations**.
 - An independent equation-based scorer and a public YAKE-package reference.
 - TextRank, SingleRank and TF-IDF through pinned PKE implementations, plus local RAKE.
-- Five feature ablations on the 500N news dataset.
-- **16 passing tests**, complete document-level metrics and independently verified score aggregation.
+- Five feature ablations across all four datasets, plus thirteen controlled scoring/preprocessing sensitivities.
+- **31 passing tests**, complete document-level metrics and independently verified score aggregation.
 - Timestamped results, source/data hashes, resumable execution and four-dataset walkthroughs.
 
 > **Reproduction scope:** This is full Table 1 coverage using documented current implementations, not verified publication-time executable equivalence. The available SemEval2010 archive contains **243 documents**, versus **244** described in the paper. Numerically higher results do not establish a controlled improvement over the original system.
@@ -104,7 +104,7 @@ All archives come from the [INESCTEC KeywordExtractor-Datasets repository](https
 
 Each archive contains document text in `docsutf8/` and corresponding line-separated gold keywords in `keys/`. The loader checks expected document counts, unique IDs and nonempty paired gold files. Archive SHA-256 hashes are recorded in the [run manifest](results/expanded/20261009T100336_607448Z/manifest.json).
 
-No synthetic or duplicate document is added to fill the SemEval count difference. There is no supervised train/test split for YAKE. TF-IDF uses the evaluated collection's document frequencies and is explicitly **transductive**.
+The follow-up audit identified the omitted SemEval ID, C-86: its Maui gold file is empty. Its text and original task stemmed annotations were recovered for a separate 244-document sensitivity evaluation; the primary exact-match run remains 243 valid pairs. No synthetic document or invented annotation is added. There is no supervised train/test split for YAKE. TF-IDF uses the evaluated collection's document frequencies and is explicitly **transductive**.
 
 ---
 
@@ -152,7 +152,7 @@ The upstream archives may change; compare their recorded hashes with the saved b
 python -m unittest discover -s tests -v
 ```
 
-**16 tests passed** in the validated environment. Checks include a hand-calculated score, phrase boundaries, casing, deduplication, POS candidate selection, explicit IDF arithmetic, RAKE scoring, Spanish stopwords and archive counts.
+**31 tests passed** in the validated environment. Checks include a hand-calculated score, phrase boundaries, casing, deduplication, POS candidate selection, explicit IDF arithmetic, RAKE scoring, Spanish stopwords and archive counts.
 
 ### Run a small cross-dataset smoke experiment
 
@@ -275,7 +275,7 @@ Each cell shows **paper F1 → our measured F1**. The independent row contains o
 
 ---
 
-## 🧪 Feature Ablation Study — 500N Only
+## 🧪 Initial Feature Ablation Study — Archived 500N Run
 
 The following experiments modify the **independent reconstruction**, not the public YAKE package. Each named feature is removed using a documented intervention. The casing/frequency/spread denominator contribution is set to zero; position/relatedness is set to one.
 
@@ -288,7 +288,7 @@ The following experiments modify the **independent reconstruction**, not the pub
 | without-WRel | 0.2800 | 0.0660 | 0.1027 |
 | without-WSpread | 0.4052 | 0.0989 | 0.1524 |
 
-Removing relatedness produces the largest measured reduction: **0.1506 → 0.1027**. Removing casing increases F1 to **0.1616** on this benchmark. These are exploratory one-dataset findings; the best ablation is not a new independently validated method. The ablations have not been repeated across all four datasets.
+Removing relatedness produces the largest measured reduction: **0.1506 → 0.1027**. Removing casing increases F1 to **0.1616** on this benchmark. These are exploratory one-dataset findings; the best ablation is not a new independently validated method. These archived news results are now supplemented by the completed four-dataset ablations in [the fidelity audit](FIDELITY_REPORT.md).
 
 ---
 
@@ -342,6 +342,46 @@ The generator reads the archived full-run summaries, published Table 1 configura
 
 ---
 
+## 🔬 Completed Fidelity Audit
+
+The follow-up audit investigates the implementation and evaluation gaps behind the original comparison. It preserves the original results and reports alternative protocols separately. **It adds 144,872 document/configuration evaluations: 142,920 on the four primary collections and 1,952 in the separate 244-document stemmed SemEval experiment.** [Independent evidence validation](results/fidelity/20261010_audit/EVIDENCE_VALIDATION.json) checks the saved metrics and baseline output identity.
+
+| Work completed | Evidence |
+|---|---|
+| All six available preconference/conference-era PyPI releases inventoried; all three distinct YAKE source families executed with windows 1 and 2 | [Release hashes and equivalence families](configs/historical_releases.json) |
+| Original cited-page C++ TextRank, SingleRank and TF-IDF sources recovered and executed; preconference RAKE snapshot tested | [Historical execution protocol](FIDELITY_PROTOCOL.md) |
+| Five feature ablations and thirteen one-choice scoring/preprocessing sensitivities across all four datasets | [Complete fidelity report](FIDELITY_REPORT.md) |
+| Missing SemEval C-86 investigated; all 244 texts evaluated with original task stemmed gold in a separate protocol | [Separate 244-document results](results/fidelity/20261010_audit/semeval244_stemmed/summary.json) |
+| Paired tests for precision, recall and F1, bootstrap intervals and Holm corrections | [Recovered comparison statistics](results/fidelity/20261010_audit/recovered_paired_statistics.json) |
+| Matching sensitivities, annotation diagnostics, document-length slices and eight concrete error examples | [Error casebook](results/fidelity/20261010_audit/CASEBOOK.md) |
+| All 31 tests passed; extraction hashes and revised source snapshots retained | [Test evidence](results/fidelity/20261010_audit/TEST_RESULTS.txt) |
+
+### Figure 5 — Feature Effects Across All Four Datasets
+
+![Four-dataset feature-removal effects in F1 percentage points](assets/figures/all_dataset_ablations.png)
+
+**How to read:** each cell is the change from that dataset's full independent reconstruction. Positive blue cells mean removing the feature helps; negative red cells mean removal hurts. Relatedness removal hurts news but helps WICC in this reconstruction. Feature effects cannot be generalized from the earlier news-only experiment.
+
+[Scalable SVG](assets/figures/all_dataset_ablations.svg) · [All-dataset ablation CSV](results/fidelity/20261010_audit/all_dataset_ablations.csv)
+
+### Figure 6 — Historical Versions and Window Settings
+
+![Published YAKE F1 versus historical source families and window settings](assets/figures/historical_release_comparison.png)
+
+**How to read:** rows fix the YAKE source version and neighbor window. The published row provides context, not an executable reference. Historical sources use current pinned dependencies; release availability does not prove which version/settings the paper used. No best-scoring historical configuration is selected retrospectively as the original system.
+
+[Scalable SVG](assets/figures/historical_release_comparison.svg) · [Historical source protocol](FIDELITY_PROTOCOL.md)
+
+**Remaining historical facts:** the authors' exact executable/dependency environment, tagged baseline inputs/parameter files, comparable unstemmed C-86 gold, and original per-document outputs have not been recovered. The audit strengthens the reproduction without asserting exact publication-time equivalence.
+
+[Audit figure provenance](assets/figures/fidelity_manifest.json) records the generator, input and output hashes. Reproduce the audit using [FIDELITY_PROTOCOL.md](FIDELITY_PROTOCOL.md). After completing its experiments and analysis, regenerate these figures with:
+
+```bash
+python plot_fidelity.py --run results/fidelity/20261010_audit
+```
+
+---
+
 ## 🔍 Evaluation & Reproducibility
 
 For each document:
@@ -368,7 +408,7 @@ The authoritative full run is [`20261009T100336_607448Z`](results/expanded/20261
 
 **All 21,684 saved prediction metrics were independently recomputed against gold labels and matched.** Four news documents returned no RAKE phrases; those zero-score outputs remained in the evaluation.
 
-Paired tests compare our own configurations on matched documents, not against unavailable original-paper document-level outputs. Reported t-test p-values are exploratory and unadjusted for multiple comparisons; bootstrap intervals are pointwise. Method timings exclude shared POS preprocessing and corpus-DF construction, so they are not end-to-end speed comparisons.
+Paired tests compare our own configurations on matched documents, not against unavailable original-paper document-level outputs. The original archived run reports exploratory unadjusted t-test p-values. The completed fidelity audit adds Holm correction within explicitly declared comparison families; bootstrap intervals remain pointwise. Method timings exclude shared POS preprocessing and corpus-DF construction, so they are not end-to-end speed comparisons.
 
 ---
 
@@ -376,7 +416,10 @@ Paired tests compare our own configurations on matched documents, not against un
 
 | Document | Purpose |
 |---|---|
-| [PROJECT_REPORT.md](PROJECT_REPORT.md) | Current four-dataset technical report |
+| [PROJECT_REPORT.md](PROJECT_REPORT.md) | Archived four-dataset comparison with follow-up audit link |
+| [FIDELITY_REPORT.md](FIDELITY_REPORT.md) | Completed historical/source and experimental fidelity audit |
+| [FIDELITY_PROTOCOL.md](FIDELITY_PROTOCOL.md) | Source recovery, controlled interventions and remaining boundaries |
+| [PRESENTATION_SCRIPT.md](PRESENTATION_SCRIPT.md) | Speaking notes, terminal demo and audit explanations |
 | [EXPANDED_PROTOCOL.md](EXPANDED_PROTOCOL.md) | Expanded baseline and evaluation decisions |
 | [ENGINEERING_PROTOCOL.md](ENGINEERING_PROTOCOL.md) | Independent scoring and equation/code differences |
 | [PROJECT_REPORT_500N.md](PROJECT_REPORT_500N.md) | Archived initial selected-benchmark report |
