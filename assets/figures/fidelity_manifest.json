@@ -1,5 +1,5 @@
 {
-  "generator_sha256": "c2f3ea2240de50d1bd6844c73f853ba903b8560873b12bcfa918e0863b4683f7",
+  "generator_sha256": "fc49055254cb69b30ce97368bc5da27a083d2fdedbe9594e1105e7ef967e0af5",
   "input_sha256": {
     "results/fidelity/20261010_audit/core/summary.json": "2aa496f739cf07c61916d820fe1177d2f054f673e948074b5da03e6a718db097",
     "results/fidelity/20261010_audit/history/summary.json": "ba138b6e1f59d2266c6cf0fa686469aab7e3ed0231065227db95ee20c559026c",
@@ -9,8 +9,8 @@
   "published_config_script_sha256": "6d72577f384e48b4ace244c5a854d53dca758790a2035e36981ac9656c2fabb1",
   "output_sha256": {
     "all_dataset_ablations.png": "05c5440abbbfd6cad2b1d425cf4c44e1d12ab485edd1a5d0153693bb37dc02d8",
-    "all_dataset_ablations.svg": "b48ce97922d3630dbd9fca52794cff072a769700f10270665f2e895c0589b669",
+    "all_dataset_ablations.svg": "3928cd49b639215ac047cd6934f62b881af6fab81ae00fd23e151510eccb0bae",
     "historical_release_comparison.png": "cd91a21cb6e6d9a6df463d9f44efc37bb16cb18e3b0e6f80aa6f45d8a7373041",
-    "historical_release_comparison.svg": "20a821ef5be63408f5537e894c83061053bc915cf563d4267212f017b223addb"
+    "historical_release_comparison.svg": "19c2705b1e87c17879d98b5c950c45d3bb0ba628f2a4eff3bb914dcc853e8d4a"
   }
 }

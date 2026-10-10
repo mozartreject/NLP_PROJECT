@@ -15,7 +15,7 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':12,'text.color':INK
 def header(fig,title,subtitle,foot):
  fig.text(.035,.965,title,fontsize=23,weight='bold',va='top');fig.text(.035,.91,subtitle,fontsize=12,color='#53647d',va='top');fig.text(.035,.025,foot,fontsize=10,color='#53647d')
 def save(fig,name,out):
- fig.savefig(out/(name+'.png'),dpi=180);fig.savefig(out/(name+'.svg'));plt.close(fig)
+ fig.savefig(out/(name+'.png'),dpi=180);svg=out/(name+'.svg');fig.savefig(svg);svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().split('\n')));plt.close(fig)
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--run',type=Path,default=ROOT/'results/fidelity/20261010_audit');a=ap.parse_args();a.run=a.run.resolve();out=ROOT/'assets/figures';out.mkdir(exist_ok=True)
  load=lambda s:json.loads((a.run/s/'summary.json').read_text())
