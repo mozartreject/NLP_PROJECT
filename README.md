@@ -294,27 +294,51 @@ Removing relatedness produces the largest measured reduction: **0.1506 → 0.102
 
 ## 🖼️ Generated Figures
 
-### Figure 1 — Complete Four-Dataset Comparison
+Each figure answers one question. Values come directly from the saved experiment summaries; the plotting script performs no new training or evaluation. PNG previews are accompanied by scalable SVG exports.
 
-![Published versus measured F1 across four datasets](results/expanded/20261009T100336_607448Z/paper_vs_ours.png)
+### Figure 1 — Which Method Wins on Each Dataset?
 
-Gray bars show the paper's Table 1 F1 values; blue bars show the current implementations. The dashed green line shows the independent reconstruction. Known implementation and corpus differences remain. Regenerate with `plot_full_comparison.py` using the explicit run directory.
+![Annotated benchmark scorecard for six configurations across four datasets](assets/figures/benchmark_scorecard.png)
 
----
+**How to read:** darker cells mean higher macro F1. Gold outlines identify the best measured method within each dataset. YAKE-package leads on SemEval2010 and WICC; TF-IDF-PKE leads on Schutz2008 and 500N-KPCrowd. This is a result of our declared configuration, not a universal ranking.
 
-### Figure 2 — Independent Feature Ablations on News
+[Scalable SVG](assets/figures/benchmark_scorecard.svg) · [Source summary](results/expanded/20261009T100336_607448Z/summary.json)
 
-![Independent reconstruction and feature ablations on 500N news](results/engineering/20261009T093634_374606Z/comparison.png)
+### Figure 2 — Published Results vs Our Experiment
 
-This chart compares the reconstruction, package reference and five feature interventions on all 500 news documents. It demonstrates configuration sensitivity rather than universal feature importance.
+![Paired published and measured F1 comparisons for all twenty paper-table cells](assets/figures/published_vs_measured.png)
 
----
+**How to read:** each line joins a gray published value to a blue measured value. Every panel uses the same score scale, and the numerical pair is shown alongside the row. All five named methods and all four datasets are included.
 
-### Figure 3 — Earlier Adapted-Baseline Experiment
+**Interpretation limit:** these differences do not establish improvements over the paper. Implementations, preprocessing and evaluation choices differ; the available SemEval archive has 243 documents versus the paper's 244. The independent reconstruction is shown separately because it has no separate row in the published table.
 
-![Earlier YAKE, RAKE-adapted and TF-IDF-adapted news comparison](results/full/comparison.png)
+[Scalable SVG](assets/figures/published_vs_measured.svg) · [Twenty-cell comparison CSV](results/expanded/20261009T100336_607448Z/paper_comparison.csv)
 
-This is the preserved initial 500N experiment. Its RAKE/TF-IDF adaptations differ from the expanded language-aware/POS-filtered configurations, so the numbers should not be merged under one implementation label. `evaluate.py` and `plot_results.py` reproduce this earlier experiment in the original environment.
+### Figure 3 — Why Are the Two YAKE Results Different?
+
+![Precision recall and macro F1 comparison between packaged YAKE and independent reconstruction](assets/figures/implementation_metrics.png)
+
+**How to read:** blue circles show YAKE-package; teal diamonds show the independent printed-equation reconstruction. Three panels separate precision, recall and F1. The reconstruction performs better on news and worse on the other three datasets, so it cannot be described as uniformly better. Each metric has its own labelled scale.
+
+[Scalable SVG](assets/figures/implementation_metrics.svg) · [Implementation choices](ENGINEERING_PROTOCOL.md)
+
+### Figure 4 — What Happens When We Remove Each Feature?
+
+![Paired feature removal effects with bootstrap confidence intervals](assets/figures/feature_ablations.png)
+
+**How to read:** zero means no change from the full reconstruction. A negative value means removing the feature hurts; a positive value means removal helps. Whiskers show paired bootstrap 95% intervals from 2,000 resamples. The right-hand columns give the F1 change in percentage points and the resulting absolute F1.
+
+Removing relatedness causes the largest observed drop: **4.80 percentage points**, from **0.1506 to 0.1027**. These are exploratory interventions on 500 news documents, not the paper's original ablation experiments or claims about all datasets.
+
+[Scalable SVG](assets/figures/feature_ablations.svg) · [Saved paired intervals](results/engineering/20261009T093634_374606Z/paired_intervals.json)
+
+### Rebuild the Figure Gallery
+
+```bash
+python generate_readme_figures.py
+```
+
+The generator reads the archived full-run summaries, published Table 1 configuration and saved ablation intervals. [Figure provenance](assets/figures/manifest.json) records their SHA-256 hashes. Earlier adapted-baseline charts remain available in [the archived results](results/full/comparison.png), but are not mixed into the current comparison.
 
 ---
 
