@@ -39,7 +39,8 @@ def tokenize(text):
         if tokens: sentences.append(tokens)
     return sentences
 
-def extract(text, config=Config(), omit=None):
+def extract(text, config=Config(), omit=None, stopwords=None, collect_trace=True):
+    stopwords = ENGLISH_STOP_WORDS if stopwords is None else stopwords
     sentences=tokenize(text)
     terms={}; candidates=Counter()
     for sid, sentence in enumerate(sentences, 1):
@@ -88,13 +89,15 @@ def extract(text, config=Config(), omit=None):
         features.append(dict(word=word,tf=tf,acronym=t['acronym'],capital=t['capital'],sentence_ids=t['sentences'],PL=pl,PR=pr,H=score,**values))
     scored=[]
     for phrase,tf in candidates.items():
-        words=phrase.split(); eligible=words[0] not in ENGLISH_STOP_WORDS and words[-1] not in ENGLISH_STOP_WORDS
+        words=phrase.split(); eligible=words[0] not in stopwords and words[-1] not in stopwords
         hs=[terms[w]['score'] for w in words]
         score=math.prod(hs)/(tf*(1+sum(hs)))
         scored.append({'phrase':phrase,'tf':tf,'size':len(words),'H':score,'eligible':eligible})
     scored.sort(key=lambda row:(row['H'],row['phrase']))
     selected=[]; decisions=[]
     for row in scored:
+        if not collect_trace and len(selected) >= config.top_k:
+            break
         reason='selected'; matched=None
         if not row['eligible']: reason='stopword_boundary'
         else:

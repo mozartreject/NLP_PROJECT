@@ -10,3 +10,7 @@ results/**/features.csv
 results/**/candidates.csv
 results/**/decisions.csv
 results/walkthrough/
+
+.venv_full/
+results/**/predictions.jsonl
+results/expanded_walkthrough/

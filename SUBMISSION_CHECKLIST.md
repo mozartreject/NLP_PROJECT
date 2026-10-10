@@ -1,51 +1,51 @@
-# Demonstration and submission checklist
+# Individual submission and demonstration
 
-## Before submission
+**Joshua Rebello · SAP ID 70562200090 · B.Tech AI & DS, 4th year**
 
-- Confirm the author details: Joshua Rebello, SAP ID 70562200090, B.Tech AI & DS, 4th year.
-- Review the report and be able to explain each code component.
-- Confirm the selected paper/scope has instructor approval where required by the course policy.
-- Keep the title and claims as selected-benchmark reproduction, not exact full-paper replication.
-- Confirm the actual full-run folder: results/engineering/20261009T093634_374606Z.
-- Include report, protocol, source code, requirements, configs, tests and selected results in the repository.
-- Include manifest.json, summary.json, per_document.csv, paired_intervals.json and comparison.png from the full run.
-- Raw data, .venv and full prediction dumps are excluded by the ignore rules. Keep source download instructions and dataset hash available.
-- Check rights before publishing the paper PDF or dataset sample text. Trace JSON/CSV can contain source text or phrases.
-- Create a public GitHub repository when ready, check the public link, and submit only the repository link as directed by the assignment.
+## Review before submission
 
-## Suggested 6–8 minute demonstration
+- Review PROJECT_REPORT.md, EXPANDED_PROTOCOL.md and the full comparison table.
+- Confirm instructor approval of the selected paper/scope if still required.
+- Describe the work as four-dataset experimental comparison with current implementations and independent equation reconstruction, not exact publication-time equivalence.
+- Explain the SemEval archive count difference: 243 available versus 244 described.
+- Distinguish modern POS-filtered PKE baselines from the earlier adapted RAKE/TF-IDF experiments.
+- Do not call higher scores proof of a better original algorithm; preprocessing/settings are different.
+- Commit code, dependencies, tests, report, config/protocol, manifests, aggregate results and per-document metrics.
+- Keep raw data, paper PDF, environments, full predictions and POS caches local.
+- Check that the public GitHub link exposes the report and full expanded results.
+- Submit the repository link according to the assignment instructions.
 
-1. Explain the input/output task and identify the ECIR paper (45 seconds).
-2. Explain why YAKE needs no supervised training (30 seconds).
-3. Show dataset count and archive hash in the full-run manifest (30 seconds).
-4. Run the eight unit tests and explain the hand-calculated score check (45 seconds).
-5. Show sample_trace.json and exported feature/candidate/decision CSV files; trace one retained and one rejected phrase (90 seconds).
-6. Show the 500-document report and comparison chart, not a five-document smoke chart (60 seconds).
-7. Explain the largest ablation drop and the casing improvement without claiming universal conclusions (45 seconds).
-8. Show the paper's Table 1 and describe the reproduction gap and implementation choices (60 seconds).
-9. Explain evidence folders and repeatability (30 seconds).
+## 8-minute demonstration
 
-## Safe presentation commands
+1. Identify the paper and explain document-to-keyword extraction (45 seconds).
+2. Show all four dataset counts and languages from the manifest (45 seconds).
+3. Explain YAKE's five features and the independent word/phrase scorer (60 seconds).
+4. Run 16 tests and explain one arithmetic and one POS/IDF test (45 seconds).
+5. Show median-length package and independent traces from results/expanded_walkthrough; explain a selected/rejected phrase (60 seconds).
+6. Show all four paper-versus-run tables and the four-panel comparison chart (90 seconds).
+7. Explain modern PKE baselines, corpus IDF and pretrained POS tagging (45 seconds).
+8. Explain reconstruction differences, SemEval count mismatch and why scores are not controlled improvements (45 seconds).
+9. Show immutable evidence and resume capability (30 seconds).
+
+## Commands
 
 ```bash
 cd "$HOME/Desktop/NLP_PROJECT"
-source .venv/bin/activate
+source .venv_full/bin/activate
 python -m unittest discover -s tests -v
-open "$HOME/Desktop/NLP_PROJECT/results/engineering/20261009T093634_374606Z"
+open "$HOME/Desktop/NLP_PROJECT/results/expanded/20261009T100336_607448Z"
 ```
 
-A smoke run creates a newer folder. `engineering_demo.py` selects the latest completed run, even if it has only five documents. For the final presentation, open the full-run folder above explicitly, or rerun the full experiment before generating the chart. Always check the chart's document count.
+A smoke run is a separate experiment. Present the complete expanded run above, not the newest small run. The earlier engineering_demo.py selects the latest engineering run and only covers 500N; it is not the four-dataset visualization.
 
-## Likely questions
+## Questions to prepare
 
-**Where is training?** There is no supervised training. The system computes document-local statistics and scores candidates directly.
+**Where is training?** YAKE and graph/statistical keyword scoring do not have supervised training in this project. POS models are pretrained dependencies; TF-IDF computes unlabeled collection statistics.
 
-**Is it an exact replication?** No. It is a selected-benchmark reproduction with an independent equation reconstruction; preprocessing and ambiguous formula choices are documented.
+**Did you reproduce the whole table?** We ran all four datasets and all five named methods using declared current implementations, plus our reconstruction. Original executable/configuration identity is unresolved, and SemEval has one fewer available document.
 
-**Why is recall low?** Only ten predictions are allowed, while the normalized gold sets average about 49 phrases; exact matching also rejects variants and partial matches.
+**What did you implement?** Independent equation reconstruction, Unicode RAKE, experiment integration, evidence generation and evaluation. PKE/YAKE package algorithms and POS models are attributed reused code.
 
-**Why do your scores differ from the paper?** Known code/formula and preprocessing differences exist. Their separate effects have not all been isolated, so we do not claim a single proven cause.
+**Why do the numbers differ?** Known tokenizer, candidate, stoplist, POS-model and scoring differences remain. Their individual effects have not all been experimentally isolated.
 
-**What did you implement?** The independent scorer, experiment/evidence pipeline, ablations and evaluation integration. The YAKE package is an attributed reference implementation.
-
-**Why not select the best ablation as your main result?** The ablations are exploratory findings on the evaluated benchmark; selecting a winner requires independent validation to support a new-method claim.
+**Are your significance tests the paper's tests?** They compare our own paired document outputs. Original per-document author outputs are unavailable; exploratory p-values are unadjusted for multiple comparisons.

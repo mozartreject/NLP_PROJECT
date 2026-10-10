@@ -1,57 +1,76 @@
-# YAKE keyword extraction: partial experimental replication
+# YAKE ECIR 2018: four-dataset experimental comparison
 
-Paper: Campos et al. (2018), A Text Feature Based Automatic Keyword Extraction Method for Single Documents. ECIR 2018, Springer LNCS 10772, pp. 684–691. DOI: 10.1007/978-3-319-76941-7_63.
+**Joshua Rebello · SAP ID 70562200090 · B.Tech AI & DS, 4th year**
 
-## Run
+This project compares all four datasets and the five methods in Table 1 of Campos et al. (2018), plus an independent YAKE equation reconstruction. It provides full table coverage using current implementations with documented differences; it does not claim exact publication-time executable equivalence.
 
-Activate `.venv`, then run `python main.py --text "Your paragraph"`.
-Run `python evaluate.py --limit 5` for a smoke check and `python evaluate.py` for all 500 documents.
+Paper: *A Text Feature Based Automatic Keyword Extraction Method for Single Documents*, ECIR 2018, Springer LNCS 10772, pp. 684–691. [DOI](https://doi.org/10.1007/978-3-319-76941-7_63).
 
-## Scope and attribution
+## Scope
 
-The original `evaluate.py` pipeline uses the authors' YAKE implementation. The added `replication/core.py` independently reconstructs the printed equations with documented choices. Dataset: 500N-KPCrowd-v1.1, downloaded from https://github.com/INESCTEC/KeywordExtractor-Datasets. Original dataset citation: Marujo, Viveiros, and Neto (2013), Keyphrase Cloud Generation of Broadcast News. Cite both the method and dataset in the report.
+| Dataset | Evaluated documents | Language |
+|---|---:|---|
+| 500N-KPCrowd | 500 | English |
+| SemEval2010 | 243 | English |
+| Schutz2008 | 1,231 | English |
+| WICC | 1,640 | Spanish |
 
-Modern YAKE package versions may differ from the 2018 implementation. Maximum phrase length 3, top 10, Levenshtein deduplication threshold 0.8. Context window fixed to 1 as an explicit implementation choice; historical code equivalence has not been established.
+The public SemEval archive contains 243 documents, versus 244 described in the paper. Six configurations produce 21,684 document/configuration evaluations. Methods: YAKE-package, TextRank-PKE, TF-IDF-PKE, SingleRank-PKE, RAKE-local and Independent-reconstruction.
 
-RAKE is a locally implemented adaptation with sklearn's English stopwords and a 1–3 word candidate restriction. TF-IDF is an sklearn adaptation with 1–3 grams, no POS filtering, and statistics fitted to the evaluated collection. These baselines are not the original paper's exact baseline implementations. TextRank and SingleRank are not replicated here. One collection is evaluated instead of the paper's four.
+YAKE is unsupervised and has no training epochs. POS-based baselines reuse pretrained spaCy models. TF-IDF builds transductive corpus statistics without labels. Gold labels are used for exact-match evaluation.
 
-Evaluation uses case-insensitive exact phrase matches after whitespace normalization, without stemming. Precision is hits / 10 even when fewer phrases are returned. Recall uses all unique gold phrases, including absent phrases. F1 is calculated per document, then averaged. This protocol must be reported; original tokenization, annotations and aggregation details may differ, so identical published numbers are not expected. Runtime excludes TF-IDF fitting and is not an end-to-end speed comparison.
+## Setup
 
-`results/full/metadata.json` records settings, package versions, and the dataset archive checksum. CSV records document-level metrics; JSON records predictions and aggregate metrics. Inspect errors and explain the method yourself before submission. The technical report is in `PROJECT_REPORT.md`; review it before submission.
-
-Do not redistribute dataset documents in your public repository without checking their terms. Obtain them from the source; commit code, metadata and aggregate results. Requirements contain pinned versions of the active environment.
-
-## Independent engineering replication
-
-See `ENGINEERING_PROTOCOL.md` for exact scope, printed-equation reconstruction choices, reference-code differences, evaluation, and demonstration instructions.
+Python 3.9 was used. From the project directory:
 
 ```bash
-python -m unittest discover -s tests -v
-python run_replication.py --ablations
-python engineering_demo.py
-```
-
-New runs are immutable timestamped directories under `results/engineering/`. `replication/core.py` implements the independent scoring pipeline; `configs/paper.json` controls exposed experimental settings. Initial package/adapted-baseline experiments remain intact. YAKE is unsupervised and has no training epochs.
-
-## Fresh environment and dataset setup
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
+python3 -m venv .venv_full
+source .venv_full/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements-full.txt
 mkdir -p data
 curl -fL "https://raw.githubusercontent.com/INESCTEC/KeywordExtractor-Datasets/master/datasets/500N-KPCrowd-v1.1.zip" -o data/500N-KPCrowd-v1.1.zip
+curl -fL "https://raw.githubusercontent.com/INESCTEC/KeywordExtractor-Datasets/master/datasets/SemEval2010.zip" -o data/SemEval2010.zip
+curl -fL "https://raw.githubusercontent.com/INESCTEC/KeywordExtractor-Datasets/master/datasets/Schutz2008.zip" -o data/Schutz2008.zip
+curl -fL "https://raw.githubusercontent.com/INESCTEC/KeywordExtractor-Datasets/master/datasets/wicc.zip" -o data/wicc.zip
 python -m unittest discover -s tests -v
-python run_replication.py --ablations
-python engineering_demo.py
+python full_comparison.py --limit 2
+python full_comparison.py
 ```
 
-The full-run archive hash recorded in the report identifies the evaluated dataset. A changed upstream archive is a different input and should be reported. The dependency versions were validated on the current Mac/Python environment; other Python versions may require compatibility changes.
+The existing `.venv` and original experiments remain intact. Pinning source/model versions and archive hashes identifies the evaluated inputs. Other Python/platform combinations may need compatibility changes. Dataset and paper files are not distributed here.
 
-## Submission documents
+## Results and reports
 
-- `PROJECT_REPORT.md`: technical report draft by Joshua Rebello (SAP ID 70562200090), based on actual measured results.
-- `SUBMISSION_CHECKLIST.md`: individual review, demonstration and publication steps.
-- `ENGINEERING_PROTOCOL.md`: detailed implementation choices and scope.
+- `PROJECT_REPORT.md`: current expanded technical report.
+- `EXPANDED_PROTOCOL.md`: exact candidate policies, language models, metrics and fidelity limits.
+- `results/expanded/20261009T100336_607448Z/COMPARISON_REPORT.md`: all published P/R/F1 values paired with measured results.
+- `paper_comparison.csv` in that folder: 20 method/dataset comparisons.
+- `summary.json`, `per_document.csv`, `manifest.json`, `paired_statistics.json`: machine-readable evidence.
+- `paper_vs_ours.png`: four-dataset chart.
+- `PROJECT_REPORT_500N.md`: preserved original selected-benchmark report.
+- `ENGINEERING_PROTOCOL.md`: independent equation reconstruction details.
 
-For the saved final demonstration, use `results/engineering/20261009T093634_374606Z` explicitly. A five-document smoke run is not the final benchmark evidence.
+The full expanded run is timestamped. New smoke runs are different experiments and must not replace the final benchmark evidence in a presentation.
+
+To plot a completed run:
+
+```bash
+python plot_full_comparison.py --run results/expanded/20261009T100336_607448Z
+```
+
+To resume an interrupted run, use the same source/settings:
+
+```bash
+python full_comparison.py --resume results/expanded/YOUR_RUN_DIRECTORY
+```
+
+## Earlier experiments
+
+`evaluate.py` compares the YAKE package against earlier RAKE/TF-IDF adaptations on 500N only. These differ from the expanded POS-filtered PKE configurations and must not be merged under the same implementation label. `run_replication.py --ablations` supplies five independent-feature ablations on 500N only. Original core-only tests in `.venv` can be run with `python -m unittest discover -s tests -p test_replication.py -v`; all 16 tests use `.venv_full`.
+
+`full_walkthrough.py` exports median-length example traces for all four datasets under `results/expanded_walkthrough/` (kept local). Run it in `.venv_full`. `walkthrough.py` and `engineering_demo.py` retain the earlier 500N traces. Modern code and printed equations have documented differences in tokenizer, casing, frequency statistics, sentence positions, relatedness and internal-stopword weighting. Numerically higher scores are not proof of a controlled improvement over the published algorithm.
+
+## Attribution
+
+[YAKE](https://github.com/INESCTEC/yake), [PKE](https://github.com/boudinfl/pke), [dataset repository](https://github.com/INESCTEC/KeywordExtractor-Datasets), and [spaCy models](https://github.com/explosion/spacy-models) are credited dependencies/data sources. The independent scorer, local RAKE and experiment/evidence pipeline are project code developed with AI assistance. Review the report and understand each component before submission. Raw documents, full prediction text and preprocessing caches remain local; public evidence includes metrics and manifests.

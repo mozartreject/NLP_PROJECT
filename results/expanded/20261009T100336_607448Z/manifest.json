@@ -1,0 +1,77 @@
+{
+  "status": "complete",
+  "settings": {
+    "top_k": 10,
+    "max_ngram": 3,
+    "dedup_threshold": 0.8,
+    "window_yake": 1,
+    "window_textrank": 2,
+    "window_singlerank": 10,
+    "normalization": "none",
+    "limit": 0,
+    "datasets": [
+      "500N-KPCrowd",
+      "SemEval2010",
+      "Schutz2008",
+      "WICC"
+    ]
+  },
+  "source_sha256": {
+    "full_comparison.py": "6d72577f384e48b4ace244c5a854d53dca758790a2035e36981ac9656c2fabb1",
+    "replication/core.py": "dc3e15d138bd172edafe7cd352dc4ed3f6d38c52a8ce2927dcad732d42b14aa0"
+  },
+  "datasets": {
+    "500N-KPCrowd": {
+      "archive_sha256": "ee422c40d2655ee59c02add44319ea9b7a9b25947dc21947da73a2a6e47fbbf7",
+      "available_documents": 500,
+      "evaluated_documents": 500,
+      "language": "en",
+      "gold_phrases_mean": 48.912,
+      "POS_cache_load_or_compute_seconds": 11.622276656000016,
+      "candidate_df_sha256": "c261d5d27d2e5cf41535c661291bf39e6b664b85bcf0c8718a110671844b6ab8"
+    },
+    "SemEval2010": {
+      "archive_sha256": "d4d5e03f7e2c5f2d5fc7b85d656836ad16648adbc1e49d4a9c2bb2a65a41cab0",
+      "available_documents": 243,
+      "evaluated_documents": 243,
+      "language": "en",
+      "gold_phrases_mean": 15.481481481481481,
+      "POS_cache_load_or_compute_seconds": 127.91667849999983,
+      "candidate_df_sha256": "5c7b8b5040308ca7124e76907af58ced52f2fbc2a5213eb458dff514e7d959c9"
+    },
+    "Schutz2008": {
+      "archive_sha256": "09f12121bee223fc25c68699c93eb26c3e066590180be09a29871d895256c844",
+      "available_documents": 1231,
+      "evaluated_documents": 1231,
+      "language": "en",
+      "gold_phrases_mean": 43.704305442729485,
+      "POS_cache_load_or_compute_seconds": 348.04843425200033,
+      "candidate_df_sha256": "fd263cd5e53c52884aee6ed52f2d6143411e93d81a00ae19fece0690476f5411"
+    },
+    "WICC": {
+      "archive_sha256": "f539fda57b1221cc6566d51ca57651ffdff35df61f2afdaad60f11359ee30995",
+      "available_documents": 1640,
+      "evaluated_documents": 1640,
+      "language": "es",
+      "gold_phrases_mean": 3.571951219512195,
+      "POS_cache_load_or_compute_seconds": 2.5750735899932806,
+      "candidate_df_sha256": "a128cd15aa26bfea09cfcc6c6df3247581043b9a8c38ab889e462b53191d89df"
+    }
+  },
+  "pke_commit": "69871ffdb720b83df23684fea53ec8776fd87e63",
+  "python": "3.9.6 (default, Oct 17 2025, 17:15:53) \n[Clang 17.0.0 (clang-1700.4.4.1)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "packages": {
+    "pke": "2.0.0",
+    "spacy": "3.7.5",
+    "en-core-web-sm": "3.7.1",
+    "es-core-news-sm": "3.7.0",
+    "yake": "0.4.8",
+    "numpy": "1.26.4",
+    "networkx": "3.2.1",
+    "scikit-learn": "1.6.1",
+    "nltk": "3.9.1"
+  },
+  "elapsed_seconds_this_invocation": 1791.393339458,
+  "records": 21684
+}

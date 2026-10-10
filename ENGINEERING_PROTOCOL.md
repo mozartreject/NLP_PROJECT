@@ -51,7 +51,7 @@ Ablations remove casing/frequency/spread denominator contributions by setting th
 ```bash
 cd "$HOME/Desktop/NLP_PROJECT"
 source .venv/bin/activate
-python -m unittest discover -s tests -v
+python -m unittest discover -s tests -p test_replication.py -v
 python run_replication.py --limit 5 --ablations
 python run_replication.py --ablations
 python engineering_demo.py

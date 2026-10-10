@@ -1,173 +1,120 @@
-# YAKE keyword extraction: selected-benchmark reproduction and independent equation reconstruction
+# YAKE ECIR 2018: expanded four-dataset experimental comparison
 
 **Student:** Joshua Rebello  
 **SAP ID:** 70562200090  
 **Programme:** B.Tech AI & DS, 4th year  
 **Course:** Natural Language Processing mini-project  
-**Experiment date:** 9 October 2026  
-**Submission status:** Technical report draft prepared for individual submission; review before submission.
+**Experiment date:** 9 October 2026
 
 ## Abstract
 
-This project studies automatic keyword extraction using the method introduced by Campos et al. at ECIR 2018. An independent Python implementation reconstructs the paper's seven scoring equations with explicitly documented decisions for ambiguous cases. We compare it against YAKE 0.4.8 on all 500 documents of the 500N-KPCrowd-v1.1 dataset, using exact phrase matching and top-ten output. The reconstruction obtains mean per-document F1 of 0.1506; the package reference obtains 0.0762. Five feature ablations, deterministic checks, paired bootstrap intervals and detailed intermediate traces extend the evaluation. These results describe the implemented configurations, rather than proving exact reproduction of the original paper: preprocessing, word scoring and phrase scoring differ across the printed equations and available author code. The project reproduces a selected benchmark, not all four original datasets.
+This project evaluates all four datasets and the five named methods in Table 1 of Campos et al.'s ECIR 2018 paper, plus an independent reconstruction of its printed YAKE equations. We evaluate 3,614 documents in six configurations, producing 21,684 document–method records. The available SemEval2010 archive contains 243 documents rather than the paper's reported 244. Methods use pinned current implementations and explicitly documented preprocessing. The report compares published precision, recall and F1 with newly measured results, without claiming executable equivalence to publication-time code. All results are computed rather than estimated or copied into unrun cells.
 
-## 1. Problem and objectives
+## 1. Problem, paper and scope
 
-The task is to extract a ranked list of useful keywords or short phrases from a document without supervised training. Such a system can support indexing, search and document summaries. The input is English document text; the output is at most ten phrases of one to three words with importance scores.
+The input is document text and the output is up to ten ranked keyword phrases of at most three words. Exact phrase matching against human-provided gold keywords evaluates extraction. The selected paper is Campos et al. (2018), *A Text Feature Based Automatic Keyword Extraction Method for Single Documents*, ECIR, Springer LNCS 10772, pp. 684–691, DOI [10.1007/978-3-319-76941-7_63](https://doi.org/10.1007/978-3-319-76941-7_63).
 
-The objectives are to implement document-level statistical scoring independently, compare with the public YAKE package, evaluate all selected-benchmark documents, inspect the contribution of each feature, and preserve enough evidence to explain and repeat every computation. The project demonstrates course topics including tokenization, stopword filtering, n-grams, frequency statistics, similarity and text extraction. The earlier adapted TF-IDF comparison additionally demonstrates corpus-based weighting.
+This expanded experiment covers the full dataset/method layout of the paper's table using modern implementations. It is not an exact full-paper replication. Recovering publication-time executable baseline versions, taggers and every parameter remains unresolved. The earlier 500N report is preserved as PROJECT_REPORT_500N.md, while this report becomes the current project report.
 
-## 2. Selected research paper
+## 2. Data and methods
 
-Campos, R., Mangaravite, V., Pasquali, A., Jorge, A., Nunes, C., and Jatowt, A. (2018). *A Text Feature Based Automatic Keyword Extraction Method for Single Documents*. ECIR 2018, Lecture Notes in Computer Science 10772, pp. 684–691. Springer. DOI: [10.1007/978-3-319-76941-7_63](https://doi.org/10.1007/978-3-319-76941-7_63).
+English datasets are 500N-KPCrowd (500 news stories), SemEval2010 (243 available computer-science papers) and Schutz2008 (1,231 medical papers). WICC contains 1,640 Spanish computer-science articles. All available paired documents/gold files are checked; no artificial document is added to SemEval. Archive hashes and counts are recorded in the run manifest. The source is the [INESCTEC dataset repository](https://github.com/INESCTEC/KeywordExtractor-Datasets).
 
-The paper combines casing, word position, normalized frequency, neighboring-word relatedness and sentence spread. It scores candidate phrases using their component word scores and phrase frequency, then removes similar phrases. Lower scores indicate higher importance. YAKE requires neither labeled training examples nor a pretrained neural network or POS tagger.
+YAKE-package uses YAKE 0.4.8. TextRank-PKE, SingleRank-PKE and TF-IDF-PKE use PKE at commit 69871ffdb720b83df23684fea53ec8776fd87e63. RAKE-local implements Unicode phrase segmentation and degree/frequency scoring independently. The independent reconstruction implements the paper's printed feature and phrase equations with declared safeguards. See EXPANDED_PROTOCOL.md and ENGINEERING_PROTOCOL.md for all decisions.
 
-The original evaluation covers SemEval2010, Schutz2008, 500N-KPCrowd and WICC. This project selects 500N-KPCrowd because it is a complete, manageable English news benchmark suitable for a short course project. Original TextRank, SingleRank, RAKE and TF-IDF comparisons are not all independently reproduced here.
+The POS-based methods use spaCy 3.7.5, en_core_web_sm 3.7.1 and es_core_news_sm 3.7.0. Modern pretrained POS taggers are reused, not trained by this project. Common PKE candidate filtering keeps 1–3-grams consisting of nouns, proper nouns and adjectives; it rejects stopwords and applies PKE length/alphanumeric filters. This is a declared common policy rather than a verified original-paper policy. TextRank uses unweighted PageRank with window 2; SingleRank uses weighted PageRank with window 10; damping is 0.85. Neither uses additional YAKE-style Levenshtein deduplication.
 
-## 3. Dataset and execution environment
+YAKE uses language-appropriate package stopwords, neighbor window 1 and deduplication threshold 0.8. Independent English reconstruction retains the earlier scikit-learn stoplist; Spanish reconstruction uses spaCy Spanish stopwords. RAKE uses spaCy stopwords and rejects phrases longer than three before counting word statistics. TF-IDF uses candidate document frequencies from the evaluated collection with PKE's smoothed weighting; this is transductive unsupervised corpus statistics.
 
-The INESCTEC dataset archive provides 500 English broadcast-news documents and paired `.key` gold-keyword files across ten news categories. The loader reads UTF-8 text, checks that document IDs are unique and that every gold file exists and is nonempty, and retains all 500 documents. We deduplicate gold phrases after casefolding and whitespace normalization.
+## 3. Evaluation and engineering
 
-Measured dataset statistics are 393.908 whitespace-separated tokens per document on average and 48.912 normalized unique gold phrases per document on average (median 45). The token count is an audit statistic, not the algorithm tokenizer's exact count. Because top-k is fixed at ten, a document with 49 gold phrases cannot exceed recall 10/49 even if every returned phrase is correct. This is an illustrative bound, not the dataset's aggregate recall ceiling.
+For each document, normalized exact matches produce P@10 = hits/10 and recall = hits/unique gold count. Per-document F1 is computed and then averaged. Casefolding and whitespace normalization are applied; no stemming, partial matches or substring credit. Unfilled slots count as precision misses. Empty outputs receive zero scores and are not discarded. Exceptions fail the run while preserving completed records.
 
-Dataset source: [INESCTEC KeywordExtractor-Datasets](https://github.com/INESCTEC/KeywordExtractor-Datasets).
+The separate .venv_full environment preserves the original .venv. The runner saves predictions incrementally and permits same-source, same-settings resume. POS preprocessing is cached using dataset/model/policy identifiers. Sixteen tests cover original arithmetic invariants plus POS selection, explicit IDF arithmetic, RAKE scoring, Spanish stopwords and dataset counts. These validate defined behavior, not equivalence to the original authors' complete experiments.
 
-Archive SHA-256:
+Paired t-tests and 2,000-resample seeded bootstrap intervals compare our YAKE-package configuration against our other configurations on matched documents. They do not compare against the paper's unavailable document-level outputs. P-values are exploratory and unadjusted for multiple comparisons; intervals are pointwise. Method timings exclude shared POS and corpus-DF preparation, so they are not end-to-end comparisons.
 
-`ee422c40d2655ee59c02add44319ea9b7a9b25947dc21947da73a2a6e47fbbf7`
+## 4. Published scores versus measured scores
 
-The user-reported machine is a MacBook Pro M4 Pro with 24 GB memory and 1 TB storage. The run manifest records Python 3.9.6, YAKE 0.4.8, NumPy 2.0.2 and scikit-learn 1.6.1. Execution uses VS Code and a project-local virtual environment. There is no training or train/test split for the single-document algorithm: the gold phrases are used for evaluation rather than scoring.
+The following tables retain every published method/dataset P/R/F1 value and pair it with our computed values. The sixth configuration has no directly corresponding published row. F1 deltas are descriptive, not evidence of a controlled improvement over the published systems.
 
-## 4. Method and implementation
+## 500N-KPCrowd
 
-### 4.1 Processing stages
+| Method | Paper P | Paper R | Paper F1 | Our P@10 | Our R | Our F1 | F1 delta |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| YAKE-package | 0.2510 | 0.0630 | 0.1010 | 0.2036 | 0.0498 | 0.0762 | -0.0248 |
+| TextRank-PKE | 0.2650 | 0.0630 | 0.1030 | 0.1154 | 0.0342 | 0.0495 | -0.0535 |
+| TF-IDF-PKE | 0.2230 | 0.0600 | 0.0950 | 0.4304 | 0.1033 | 0.1596 | +0.0646 |
+| SingleRank-PKE | 0.1900 | 0.0540 | 0.0840 | 0.1672 | 0.0462 | 0.0687 | -0.0153 |
+| RAKE-local | 0.1200 | 0.0380 | 0.0580 | 0.1356 | 0.0439 | 0.0630 | +0.0050 |
+| Independent-reconstruction | — | — | — | 0.4000 | 0.0979 | 0.1506 | — |
 
-1. Split text into sentences using an explicit regex rule, then tokenize Unicode words, punctuation and digits.
-2. Count word occurrences, sentence positions, acronym/title casing and neighboring words. Punctuation and digit tokens interrupt phrase blocks.
-3. Compute the five word features and combine them into a word score.
-4. Enumerate contiguous one-, two- and three-word candidates, recording their frequencies.
-5. Compute phrase scores, reject candidates that start or end with stopwords, sort ascending and deduplicate.
-6. Return up to ten phrases and compare them with the gold phrases.
+## SemEval2010
 
-The independent engine is `replication/core.py`. The experiment runner is `run_replication.py`; the settings are in `configs/paper.json`. The scorer receives only document text and configuration, not gold labels.
+| Method | Paper P | Paper R | Paper F1 | Our P@10 | Our R | Our F1 | F1 delta |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| YAKE-package | 0.1530 | 0.1030 | 0.1230 | 0.1523 | 0.1021 | 0.1207 | -0.0023 |
+| TextRank-PKE | 0.1010 | 0.0670 | 0.0810 | 0.0309 | 0.0201 | 0.0241 | -0.0569 |
+| TF-IDF-PKE | 0.0360 | 0.0230 | 0.0280 | 0.1346 | 0.0915 | 0.1078 | +0.0798 |
+| SingleRank-PKE | 0.0350 | 0.0220 | 0.0270 | 0.0457 | 0.0294 | 0.0354 | +0.0084 |
+| RAKE-local | 0.0070 | 0.0040 | 0.0050 | 0.0066 | 0.0037 | 0.0047 | -0.0003 |
+| Independent-reconstruction | — | — | — | 0.0753 | 0.0519 | 0.0608 | — |
 
-### 4.2 Scoring
+## Schutz2008
 
-The reconstructed feature formulas are:
+| Method | Paper P | Paper R | Paper F1 | Our P@10 | Our R | Our F1 | F1 delta |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| YAKE-package | 0.2170 | 0.0580 | 0.0910 | 0.3327 | 0.0872 | 0.1323 | +0.0413 |
+| TextRank-PKE | 0.1980 | 0.0520 | 0.0820 | 0.0515 | 0.0138 | 0.0209 | -0.0611 |
+| TF-IDF-PKE | 0.1000 | 0.0280 | 0.0430 | 0.4129 | 0.1074 | 0.1623 | +0.1193 |
+| SingleRank-PKE | 0.0820 | 0.0240 | 0.0370 | 0.0881 | 0.0250 | 0.0369 | -0.0001 |
+| RAKE-local | 0.0130 | 0.0040 | 0.0060 | 0.0158 | 0.0049 | 0.0069 | +0.0009 |
+| Independent-reconstruction | — | — | — | 0.2877 | 0.0765 | 0.1157 | — |
 
-- Casing: `max(acronym_count, noninitial_titlecase_count) / log2(tf)`; a denominator of 1 is used when `tf = 1`.
-- Position: `log2(log2(2 + median_sentence_position))`, with sentence positions beginning at 1.
-- Frequency: `tf / (mean_tf + population_std_tf)` over all observed word types.
-- Relatedness: `(0.5 + WL*tf/max_tf + PL) + (0.5 + WR*tf/max_tf + PR)`.
-- Spread: distinct sentences containing the word divided by total sentence count.
+## WICC
 
-Here WL and WR are distinct left/right neighbor counts divided by the corresponding neighbor occurrence totals; PL and PR are distinct neighbor counts divided by maximum word frequency. The configured neighbor window is one word on each side within a punctuation block.
+| Method | Paper P | Paper R | Paper F1 | Our P@10 | Our R | Our F1 | F1 delta |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| YAKE-package | 0.0500 | 0.1410 | 0.0730 | 0.0956 | 0.2799 | 0.1378 | +0.0648 |
+| TextRank-PKE | 0.0180 | 0.0580 | 0.0270 | 0.0192 | 0.0627 | 0.0284 | +0.0014 |
+| TF-IDF-PKE | 0.0260 | 0.0670 | 0.0370 | 0.0790 | 0.2200 | 0.1121 | +0.0751 |
+| SingleRank-PKE | 0.0170 | 0.0450 | 0.0240 | 0.0492 | 0.1451 | 0.0710 | +0.0470 |
+| RAKE-local | 0.0040 | 0.0120 | 0.0060 | 0.0043 | 0.0163 | 0.0066 | +0.0006 |
+| Independent-reconstruction | — | — | — | 0.0694 | 0.1928 | 0.0986 | — |
 
-The word score is:
+## Interpretation limits
 
-`H(w) = WRel * WPosition / (WCase + WFreq/WRel + WSpread/WRel)`.
+Do not infer superiority from paper-vs-run deltas: original executable versions, tokenization, stoplists, POS taggers and exact aggregation details have not been matched.
+Our PKE baselines use a common POS-filtered 1–3-gram policy. TextRank window=2 and unweighted PageRank; SingleRank window=10 and weighted PageRank; damping=0.85.
+RAKE is a local Unicode implementation with language-specific spaCy stopwords; phrases longer than 3 are discarded before word statistics.
+Independent reconstruction uses the prior English stoplist for English and spaCy Spanish stopwords for WICC; it retains documented equation safeguards.
+Paired statistics compare our matched document outputs, not unpublished per-document outputs from the paper. T-test p-values are unadjusted exploratory values across multiple comparisons; bootstrap intervals are pointwise.
+Timing columns exclude shared POS preprocessing and corpus DF construction; those stage times appear in the manifest.
 
-The phrase score is:
+## 5. Interpretation
 
-`H(phrase) = product(H(w)) / (phrase_tf * (1 + sum(H(w))))`.
+The highest measured F1 configurations in this run are TF-IDF-PKE on 500N-KPCrowd (0.1596), YAKE-package on SemEval2010 (0.1207), TF-IDF-PKE on Schutz2008 (0.1623), and YAKE-package on WICC (0.1378). No configuration wins every dataset. The independent reconstruction outperforms our YAKE package on news, but scores below it on the other three datasets. These are within-run findings under our declared policies.
 
-All phrase words participate in the independent implementation, including internal stopwords. English stopwords come from scikit-learn. Deduplication uses `1 - Levenshtein_distance/max_string_length`; a candidate is rejected if this similarity to an earlier retained phrase is strictly above 0.8. Equal-score candidates are ordered alphabetically.
+Compare the ranking within each dataset rather than choosing the dataset with the most favorable score. A negative delta indicates a reproduction gap for that method/configuration; a positive delta does not establish superiority because tokenizers, stoplists, POS taggers, phrase generation, implementation versions and possibly gold matching/aggregation differ.
 
-### 4.3 Fidelity decisions and package comparison
+The independent reconstruction is an extra project configuration. It is not substituted for the YAKE-package row when comparing the five named methods. The earlier five feature ablations remain available for 500N only; ablations have not been run on all four datasets. No universal importance claim follows from that one-dataset exploratory experiment.
 
-These choices are explicit reconstruction decisions, not verified original experimental settings. The paper's casing denominator is zero for a singleton term, so a guard is necessary. The printed position formula requires a sentence-index convention. The stoplist and several preprocessing details are not uniquely specified by the paper alone.
+## 6. Reproducibility and limitations
 
-The installed YAKE package uses segtok tokenization, plural normalization, non-stopword frequency statistics, natural-log casing/position formulas, omission of the printed PL/PR relatedness additions and special internal-stopword phrase weighting. The inspected historical author source at commit `36b3f0967cbef4048261c33845eb036163c6f278`, dated November 2018, already contains several of these differences and postdates the conference publication. It is not treated as the exact publication-time implementation.
+The authoritative expanded run is results/expanded/20261009T100336_607448Z. EVIDENCE_VALIDATION.json verifies 3,614 evaluated documents, 21,684 unique document/configuration records, 20 paper-versus-run pairs and summary aggregation. Full per-document evidence, package/source hashes, settings, archive hashes and matched statistics are preserved. Predictions and dataset texts remain local; public evidence consists of metrics, manifests and figures.
 
-Both methods use the same exposed top-k, maximum n-gram size, neighbor window and deduplication threshold. They nevertheless differ internally. Their comparison measures the behavior of these two configurations; it cannot isolate the effect of any one implementation difference.
+The one-document SemEval difference prevents exact corpus identity. Current PKE implementations and the shared candidate policy are not original baseline executables. POS preprocessing and word normalization differ from historical implementations. The independent equation reconstruction retains documented ambiguities, including singleton casing and sentence indexing. We do not claim all paper findings or significance tests have been exactly reproduced. Coverage of all table cells is complete for our declared configurations.
 
-## 5. Evaluation protocol
+## 7. Demonstration
 
-Predictions and gold phrases are casefolded and whitespace-normalized, then matched exactly. There is no stemming, substring credit or partial phrase credit. Duplicate predictions cannot earn duplicate hits.
-
-For each document: `P@10 = hits/10`, `R = hits/unique_gold_count`, and `F1 = 2PR/(P+R)` when the denominator is nonzero. Unfilled prediction slots count as precision misses. The primary reported score is the arithmetic mean of document F1 values. The harmonic mean of macro precision and macro recall is also saved, but is not substituted for the primary score.
-
-All 500 documents are evaluated by seven configurations, producing 3,500 unique document–method records. Source hashes in the run manifest were verified against the current source files. No extraction failure was reported in the complete run. Eight unit tests check a hand-calculated score, sentence/phrase boundaries, casing, edit distance, deterministic/empty behavior, metrics, invalid configuration and finite feature scores.
-
-Confidence intervals use 2,000 paired bootstrap resamples of document F1 differences with seed 42. This is an added analysis, not replication of the paper's paired t-test. It describes document-resampling uncertainty for our protocol, not uncertainty about all original implementation choices.
-
-## 6. Measured results
-
-The authoritative run is `results/engineering/20261009T093634_374606Z`. Its total runner elapsed time is 132.93 seconds. Mean per-document times below include extraction and trace construction; they exclude dataset loading, bootstrap analysis and plotting and are not pure scoring benchmarks.
-
-| Configuration | P@10 | Recall | Macro F1 | Mean seconds/document |
-|---|---:|---:|---:|---:|
-| paper-equations | 0.4000 | 0.0979 | 0.1506 | 0.04040 |
-| YAKE-package | 0.2036 | 0.0498 | 0.0762 | 0.00952 |
-| without-WCase | 0.4284 | 0.1048 | 0.1616 | 0.03524 |
-| without-WPosition | 0.3690 | 0.0921 | 0.1408 | 0.04833 |
-| without-WFreq | 0.4132 | 0.1007 | 0.1552 | 0.03782 |
-| without-WRel | 0.2800 | 0.0660 | 0.1027 | 0.05426 |
-| without-WSpread | 0.4052 | 0.0989 | 0.1524 | 0.03977 |
-
-For the independent reconstruction, the harmonic mean of macro P/R is 0.1573, whereas mean document F1 is 0.1506. For the package reference these quantities are 0.0801 and 0.0762 respectively. Keeping these conventions separate avoids an aggregation error.
-
-The paired mean F1 difference between the reconstruction and package reference is +0.0744, with a bootstrap 95% interval [0.0677, 0.0816]. The configurations differ in multiple ways, so this is not evidence that the original paper's algorithm has been improved by a controlled single change.
-
-### 6.1 Feature ablations
-
-For casing, frequency and spread, an ablation sets the corresponding denominator contribution to zero. Position and relatedness are set to one. Each intervention removes the named effect from the combined scoring formula. These are project-defined experiments, not ablations reported by the original paper.
-
-Removing relatedness causes the largest observed F1 reduction, from 0.1506 to 0.1027. Removing position also lowers F1, to 0.1408. Removing casing improves F1 to 0.1616. Frequency and spread removals yield smaller improvements. These findings apply to this reconstruction, dataset and matching protocol; they do not establish universal feature importance. The highest-scoring ablation is exploratory, not a new method selected and validated on an independent test set.
-
-### 6.2 Comparison with the published table
-
-The paper's Table 1 reports the following YAKE results on 500N-KPCrowd: P = 0.251, R = 0.063 and F1 = 0.101.
-
-| Method/source | P@10 | Recall | F1 | F1 difference from published YAKE |
-|---|---:|---:|---:|---:|
-| Published YAKE, Table 1 | 0.2510 | 0.0630 | 0.1010 | — |
-| Current YAKE package run | 0.2036 | 0.0498 | 0.0762 | -0.0248 |
-| Independent reconstruction | 0.4000 | 0.0979 | 0.1506 | +0.0496 |
-
-This comparison shows a numerical reproduction gap; it does not establish a controlled improvement over the published system. Plausible contributors include tokenization, stopwords, frequency normalization, equation/code discrepancies, phrase treatment, case normalization and metric conventions. Their individual effects have not been isolated experimentally.
-
-The original table also reports TextRank F1 0.103 on this dataset, slightly above YAKE's 0.101; the authors report no significant difference between them. Therefore the paper does not support a claim that YAKE wins every metric on every dataset.
-
-The earlier project evaluation produced F1 0.0621 for RAKE-adapted and 0.1459 for TF-IDF-adapted. Those are secondary adapted-baseline results, not replications of the paper's baseline implementations. In particular, the project's TF-IDF adaptation uses unsupervised IDF fitted on the evaluated corpus without the original POS filtering. We do not use these numbers to validate the original paper's comparative claims.
-
-## 7. Reproducibility and evidence
-
-Each run creates a separate UTC-stamped folder rather than overwriting earlier results. `manifest.json` records source and archive hashes, document IDs, settings, package versions and completion state. `per_document.csv` provides paired scores and timings; `predictions.json` preserves ranked outputs. `sample_trace.json` records example text, sentence tokens, feature values, term scores, candidate scores, filtering decisions and gold labels. The demonstration utility exports readable feature/candidate/decision tables and a chart.
-
-The prior package-based walkthrough remains available in `results/walkthrough`. It shows package internals; the independent trace shows our reconstructed internals. Presenting both makes the implementation differences inspectable.
-
-Reproduction commands, without interactive-shell comments:
-
-```bash
-cd "$HOME/Desktop/NLP_PROJECT"
-source .venv/bin/activate
-python -m unittest discover -s tests -v
-python run_replication.py --ablations
-python engineering_demo.py
-```
-
-No training commands are missing. YAKE computes document-specific statistics at extraction time. Any use of the term “training” in the presentation should be corrected to “feature computation and keyword extraction.”
-
-## 8. Limitations and future work
-
-The scope is one English benchmark rather than the original multilingual four-dataset evaluation. The regex tokenizer is simpler than segtok and may split abbreviations incorrectly. The singleton casing guard, indexing, stoplist and population statistics are declared implementation decisions. The experiment does not reconstruct all original baseline systems, POS filtering or significance tests.
-
-Unit tests validate selected invariants and arithmetic examples, not complete equivalence to an unavailable publication-time implementation. The run's gains and ablations have not been validated on an independent dataset. Timing results are specific to this execution environment and include trace overhead.
-
-Useful follow-up work would independently validate on another original dataset, obtain clarification of publication-time implementation details, compare tokenizer and stoplist choices one at a time, and reproduce original POS-filtered baselines. These tasks remain future work and are not claimed as completed.
-
-## 9. Conclusion
-
-The project delivers a working, auditable keyword extraction system, complete selected-benchmark evaluation and transparent comparison between printed-equation reconstruction and public-package behavior. It meets the technical aim of demonstrating an NLP extraction pipeline with reproducible evidence. Exact agreement with the published scores was not achieved; the report documents the gap rather than concealing it.
+Use the full run's manifest to show counts and versions, then COMPARISON_REPORT.md and paper_vs_ours.png for all four datasets. Run the 16 tests, explain one sample pipeline trace from the earlier walkthrough, and show per_document.csv to establish that the aggregate tables come from actual document-level evaluation. Explain that YAKE has no supervised training phase and that the POS models are pretrained dependencies.
 
 ## References and attribution
 
-1. Campos et al. (2018), ECIR paper identified in Section 2. [Publisher record](https://link.springer.com/chapter/10.1007/978-3-319-76941-7_63).
-2. [INESCTEC YAKE author repository](https://github.com/INESCTEC/yake). Package reference and historical implementation audit.
-3. [Pinned historical scoring source](https://github.com/INESCTEC/yake/blob/36b3f0967cbef4048261c33845eb036163c6f278/yake/datarepresentation.py).
-4. [INESCTEC KeywordExtractor-Datasets](https://github.com/INESCTEC/KeywordExtractor-Datasets). 500N-KPCrowd archive and gold keywords.
-5. scikit-learn English stopword list and TF-IDF implementation, version recorded in the experiment manifest.
+- Campos et al., ECIR 2018 paper and Table 1, DOI above.
+- [INESCTEC YAKE](https://github.com/INESCTEC/yake), package reference.
+- [Pinned PKE source](https://github.com/boudinfl/pke/tree/69871ffdb720b83df23684fea53ec8776fd87e63), three attributed baseline implementations.
+- [INESCTEC KeywordExtractor-Datasets](https://github.com/INESCTEC/KeywordExtractor-Datasets), document/gold archives.
+- [spaCy language models](https://github.com/explosion/spacy-models), English and Spanish POS tagging.
 
-The independent engine is project code; the reference system and dependencies are credited upstream software. AI assistance was used for implementation scaffolding, testing and report drafting; the student should review and be able to explain every submitted component and adapt this disclosure to the course's requirements.
+AI assistance was used for scaffolding, testing and report drafting. Joshua should review and be able to explain each submitted component, and adapt the disclosure to course requirements. Independent scorer, RAKE implementation and experiment/evidence integration are project code; PKE, YAKE and POS models are credited reused dependencies.
