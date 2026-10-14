@@ -1,7 +1,7 @@
 import math,unittest
 from replication.core import extract as original
 from replication.fidelity_core import Policy,extract
-from fidelity_experiments import holm,load_rows,CORE_POLICIES
+from scripts.fidelity_experiments import holm,load_rows,CORE_POLICIES
 class FidelityTests(unittest.TestCase):
  def test_baseline_matches_original_with_trace_and_ranking(self):
   for text in ['', 'the and of', 'NASA studies stars. Bright stars reveal galaxies.', 'áreas de datos. Datos importantes.', 'apple apple apple. banana. apple!']:
@@ -61,7 +61,7 @@ class EvidenceReaderRegressionTests(unittest.TestCase):
  def test_jsonl_unicode_separators_are_not_record_boundaries(self):
   import json,tempfile
   from pathlib import Path
-  from fidelity_experiments import read_jsonl
+  from scripts.fidelity_experiments import read_jsonl
   rows=[{'phrase':'datos\u0085de\u2028redes\u2029'}, {'phrase':'segunda línea'}]
   with tempfile.TemporaryDirectory() as folder:
    p=Path(folder)/'predictions.jsonl';p.write_text('\n'.join(json.dumps(r,ensure_ascii=False) for r in rows)+'\n')

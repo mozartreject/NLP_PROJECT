@@ -1,8 +1,0 @@
-{
-  "top_k": 10,
-  "max_ngram": 3,
-  "window": 1,
-  "dedup_threshold": 0.8,
-  "bootstrap_samples": 2000,
-  "seed": 42
-}

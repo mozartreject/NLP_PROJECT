@@ -1,5 +1,5 @@
 import unittest
-from full_comparison import load_model,rake,score,load_dataset
+from scripts.full_comparison import load_model,rake,score,load_dataset
 from replication.core import Config,extract
 import pke
 

@@ -1,7 +1,7 @@
 import math
 import unittest
 from replication.core import Config, extract, similarity
-from evaluate import metrics
+from scripts.full_comparison import score as metrics
 
 class ReplicationTests(unittest.TestCase):
     def test_hand_computed_single_term(self):

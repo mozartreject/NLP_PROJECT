@@ -1,4 +1,0 @@
--r requirements-full.txt
-pandas==2.3.3
-pytz==2026.5
-tzdata==2026.5

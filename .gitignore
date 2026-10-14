@@ -14,3 +14,11 @@ results/walkthrough/
 .venv_full/
 results/**/predictions.jsonl
 results/expanded_walkthrough/
+
+# The public repository keeps one evidence archive and compact results.
+results/**
+!results/evidence.zip
+!results/summary.json
+!results/comparison.csv
+assets/figures/*.svg
+assets/figures/*manifest.json
